@@ -1,0 +1,48 @@
+<nav class="flex items-center justify-between border-b border-sky-300 py-2">
+  <div class="flex items-center gap-6 justify-between lg:justify-start w-[55%]">
+    <!--  start ul + -->
+
+    <ul class="hidden lg:flex items-center gap-x-8 sm:order-1 capitalize text-lg">
+      @for (link of links; track $index) {
+        <li
+          class="cursor-pointer hover:text-sky-300"
+          routerLinkActive="text-primary  font-bold"
+          [routerLink]="['/', link]"
+        >
+          {{ link }}
+        </li>
+      }
+    </ul>
+    <!-- logo image -->
+
+    <div class="hidden md:block cursor-pointer" routerLink="/home">
+      <img [src]="logo" alt="" class="block size-12 rounded-lg" />
+    </div>
+    <!-- start menu -->
+    <div class="lg:hidden -order-1">
+      <img class="lg:hidden w-8" [src]="menuIcon" alt="" />
+    </div>
+    <!-- end menu -->
+    <!--  end sm screen + -->
+  </div>
+
+  <div class="flex gap-3">
+    <!-- <button
+      class="sm:text-xs md:text-lg text-white font-semibold py-2 px-4 bg-primary rounded-full"
+    >
+      Sign in
+    </button> -->
+
+    <button
+      class="bg-primary text-white font-semibold text-xs px-3 py-1.5 md:text-lg md:px-6 md:py-2 rounded-full shrink-0 whitespace-nowrap"
+    >
+      Sign in
+    </button>
+
+    <button
+      class="hidden lg:block bg-danger text-white font-semibold text-xs px-3 py-1.5 md:text-lg md:px-6 md:py-2 rounded-full shrink-0 whitespace-nowrap"
+    >
+      Sign up
+    </button>
+  </div>
+</nav>
