@@ -1,12 +1,12 @@
-<nav class="h-15 fixed top-0 left-0 right-0 z-50">
-  <div class="flex items-center justify-between h-full mx-4 sm:mx-[5%] py-5 bg-[#eee]">
+<nav class="h-[5vw] fixed top-0 left-0 right-0 z-50">
+  <div class="flex items-center justify-between h-full mx-4 sm:mx-[5%] bg-[#fff]">
     <div class="flex items-center gap-6 justify-between lg:justify-start w-[55%]">
       <!--  start ul + -->
 
       <ul class="hidden lg:flex items-center gap-x-8 sm:order-1 capitalize text-lg">
         @for (link of links; track $index) {
           <li
-            class="cursor-pointer hover:text-sky-300"
+            class="cursor-pointer hover:text-sky-300 text-[2vw]"
             routerLinkActive="text-primary  font-bold"
             [routerLink]="['/', link]"
           >
@@ -17,11 +17,11 @@
       <!-- logo image -->
 
       <div class="hidden md:block cursor-pointer bg-sky-400 hover:bg-primary" routerLink="/home">
-        <img [src]="logo" alt="" class="block size-12" />
+        <img [src]="logo" alt="" class="block w-[10vw] lg:w-[8vw] h-[4vw]" />
       </div>
       <!-- start menu -->
       <div class="lg:hidden -order-1">
-        <fa-icon class="lg:hidden w-8" [icon]="bars"></fa-icon>
+        <fa-icon class="lg:hidden w-8 h-[1vw] sm:h-[3vh]" [icon]="bars"></fa-icon>
       </div>
       <!-- end menu -->
       <!--  end sm screen + -->
@@ -34,14 +34,27 @@
         Sign in
       </button> -->
 
-      <button
+      <!-- <button
         class="bg-sky-400 hover:bg-primary text-white font-semibold text-xs px-3 py-1.5 md:text-lg md:px-6 md:py-2 shrink-0 whitespace-nowrap"
+      >
+        Sign in
+      </button> -->
+      <!-- <button
+        class="bg-sky-400 hover:bg-primary text-white font-semibold text-[2vw] px-3 py-1.5 md:text-lg md:px-6 md:py-2 shrink-0 whitespace-nowrap"
+      > -->
+      <!-- <button
+        class="bg-sky-400 hover:bg-primary text-white font-semibold text-[2vw] px-[20px] py-[px] sm:px-[3vw] sm:py-[1vw] md:px-[2vw] md:py-[0.5vw] shrink-0 whitespace-nowrap"
+      >
+        Sign in
+      </button> -->
+      <button
+        class="bg-sky-400 hover:bg-primary text-white font-semibold text-[2vw] py-[1vw] px-[20px] sm:px-[3vw] md:px-[2vw] shrink-0 whitespace-nowrap"
       >
         Sign in
       </button>
 
       <button
-        class="hidden lg:block bg-red-400 hover:bg-danger text-white font-semibold text-xs px-3 py-1.5 md:text-lg md:px-6 md:py-2 shrink-0 whitespace-nowrap"
+        class="hidden lg:block bg-red-400 hover:bg-danger text-white font-semibold text-[2vw] px-[2vw] py-[1vw] shrink-0 whitespace-nowrap"
       >
         Sign up
       </button>

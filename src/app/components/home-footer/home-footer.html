@@ -1,0 +1,28 @@
+<footer
+  class="mt-[50px] sm:mt-[16vw] md:mt-[14vw] md:mt-[5vw] w-full flex flex-col lg:flex-row gap-2 lg:gap-0"
+>
+  <div
+    class="lg:w-[50%] lg:order-1 relative w-full h-[40vw] sm:h-[250px] md:h-[250px] lg:h-auto bg-primary"
+  >
+    <img
+      [src]="footerPhoto"
+      alt="Doctor"
+      class="absolute block bottom-0 h-[50vw] sm:h-[350px] lg:h-auto left-[50%] lg:left-auto transform -translate-x-[50%] lg:translate-x-0 lg:right-10"
+    />
+  </div>
+
+  <div class="w-full flex flex-col lg:flex-row bg-primary relative overflow-visible">
+    <section class="w-full sm:flex flex-col justify-center shrink-0 gap-6 sm:p-8 lg:p-14">
+      <h2 class="hidden sm:block text-[5vw] lg:text-[3vw] text-white font-semibold overflow-hidden">
+        Book Appointment <br />
+        With 100+ Trusted Doctors
+      </h2>
+
+      <button
+        class="shrink-0 w-full lg:w-[60%] bg-white hover:bg-danger hover:text-white text-black font-semibold text-[3vw] px-1 py-2 lg:text-[1.5vw] md:px-3 md:py-6"
+      >
+        Book appointment
+      </button>
+    </section>
+  </div>
+</footer>

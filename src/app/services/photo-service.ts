@@ -7,7 +7,9 @@ export class PhotoService {
   static = {
     logo: 'logo.png',
     headerPhoto: 'homeHeader.png',
+    footerPhoto: 'homeFooter.png',
     headerDisc: 'headerDisc.png',
+    availableIcon: 'icon-ethereum.svg',
   };
   staticSpecialityIcon = {
     heart: 'heartHealth.png',

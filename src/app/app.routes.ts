@@ -15,7 +15,7 @@ export const routes: Routes = [
   },
   // //////////////////////////////////////////////////////////
   {
-    path: 'top',
-    loadComponent: () => import('./components/top-doctors/top-doctors').then((c) => c.TopDoctors),
+    path: 'f',
+    loadComponent: () => import('./components/home-footer/home-footer').then((c) => c.HomeFooter),
   },
 ];
