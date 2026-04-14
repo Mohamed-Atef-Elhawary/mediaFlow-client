@@ -1,0 +1,17 @@
+<div>
+  <ul class="flex flex-col gap-y-3">
+    @for (speciality of specialityList; track $index) {
+      <li
+        [ngClass]="
+          speciality === selectedSpeciality()
+            ? 'bg-primary text-white'
+            : 'bg-white text-secondary  hover:bg-gray-200'
+        "
+        (click)="sendSpectiality(speciality)"
+        class="border border-gray-400 w-full s p-[5px] cursor-pointer text-[3vw] md:text-[1.5vw]"
+      >
+        {{ speciality }}
+      </li>
+    }
+  </ul>
+</div>

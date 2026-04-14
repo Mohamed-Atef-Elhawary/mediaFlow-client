@@ -62,7 +62,9 @@
     @for (key of specialityKeys; track $index) {
       <li class="text-center shrink-0">
         <img
-          class="w-15 h-15 lg:w-[7vw] lg:h-[7vw] block mx-auto mb-2 bg-sky-200 hover:bg-danger rounded-full"
+          routerLink="/doctors"
+          [queryParams]="{ speciality: key }"
+          class="w-15 h-15 lg:w-[7vw] lg:h-[7vw] block mx-auto mb-2 bg-sky-200 hover:bg-danger rounded-full cursor-pointer"
           [src]="speciality[key]"
           alt=""
         />

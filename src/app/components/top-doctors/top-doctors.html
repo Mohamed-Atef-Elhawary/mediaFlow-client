@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-10 text-center py-8 overflow-hidden bg-sky-50">
+<div id="topDoctors" class="flex flex-col gap-10 text-center py-8 overflow-hidden bg-sky-50">
   <div class="text-center">
     <h2 class="font-semibold text-[4vw] text-dark mb-4">Top Doctors to Book</h2>
     <p class="text-[2vw] text-secondary">
@@ -7,7 +7,7 @@
   </div>
 
   <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-    @for (doctor of allDoctors().slice(0, 10); track doctor._id) {
+    @for (doctor of allDoctors().slice(0, 8); track doctor._id) {
       <article
         [routerLink]="['/appointment', doctor._id]"
         class="h-auto flex flex-col overflow-hidden p-[10px] bg-[#14263c] hover:bg-[#004b84]"
@@ -46,7 +46,8 @@
   </div>
 
   <button
-    class="w-full bg-[#14263c] hover:bg-[#004b84] text-white font-semibold text-[4vw] px-1 py-2 lg:text-[2vw] md:px-3 md:py-6 shrink-0"
+    routerLink="/doctors"
+    class="w-full bg-[#14263c] hover:bg-[#004b84] text-white font-semibold text-[4vw] px-1 py-2 lg:text-[2vw] md:px-3 md:py-6 shrink-0 cursor-pointer"
   >
     MORE
   </button>

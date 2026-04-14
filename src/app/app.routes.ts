@@ -27,8 +27,13 @@ export const routes: Routes = [
   },
   // //////////////////////////////////////////////////////////
   {
-    path: 'appointment/:docID',
+    path: 'appointment/:docId',
     loadComponent: () => import('./pages/appointment/appointment').then((c) => c.Appointment),
+  },
+  {
+    path: 'myappointment',
+    loadComponent: () =>
+      import('./pages/my-appointment/my-appointment').then((c) => c.MyAppointment),
   },
   {
     path: 'register/:state',
@@ -37,8 +42,8 @@ export const routes: Routes = [
 
   ///////////////////////////////////////////////////////////
 
-  // {
-  //   path: 'f',
-  //   loadComponent: () => import('./components/home-footer/home-footer').then((c) => c.HomeFooter),
-  // },
+  {
+    path: 'all',
+    loadComponent: () => import('./components/all-doctors/all-doctors').then((c) => c.AllDoctors),
+  },
 ];

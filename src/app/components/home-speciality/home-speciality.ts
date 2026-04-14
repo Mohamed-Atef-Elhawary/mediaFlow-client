@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { PhotoService } from '../../services/photo-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home-speciality',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home-speciality.html',
   styleUrl: './home-speciality.css',
 })

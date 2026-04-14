@@ -1,0 +1,38 @@
+<div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+  @for (doctor of allDoctors() | filterBySpecialty: speciality; track doctor._id) {
+    <article
+      [routerLink]="['/appointment', doctor._id]"
+      class="h-auto flex flex-col overflow-hidden p-[10px] bg-[#14263c] hover:bg-[#004b84]"
+    >
+      <div class="overflow-hidden w-full h-[70%] lg:h-[65%] p-2 shrink-0">
+        <img class="block w-full h-full object-cover" [src]="doctor.image" />
+      </div>
+
+      <div class="flex flex-col justify-evenly items-start p-2 mt-4 h-[30%] lg:h-[35%] shrink-0">
+        <p class="font-bold text-[5vw] sm:text-[3vw] md:text-[2vw] text-white">
+          {{ doctor.name }}
+        </p>
+        <p class="text-secondary font-semibold text-[5vw] sm:text-[3vw] md:text-[2vw]">
+          {{ doctor.speciality }}
+        </p>
+
+        <div class="flex gap-2 items-center">
+          <!-- <p class="w-[15px] h-[15px] bg-green-500 rounded-full"></p> -->
+          @if (doctor.available) {
+            <fa-icon
+              [icon]="availableIcon"
+              class="rounded-full text-green-700 text-[5vw] sm:text-[3vw] md:text-[2vw]"
+            ></fa-icon>
+            <p class="text-green-500 text-[5vw] sm:text-[3vw] md:text-[2vw]">Available</p>
+          } @else {
+            <fa-icon
+              [icon]="notAvailableIcon"
+              class="rounded-full text-secondary text-[5vw] sm:text-[3vw] md:text-[2vw]"
+            ></fa-icon>
+            <p class="text-secondary text-[5vw] sm:text-[3vw] md:text-[2vw]">Not Available</p>
+          }
+        </div>
+      </div>
+    </article>
+  }
+</div>
