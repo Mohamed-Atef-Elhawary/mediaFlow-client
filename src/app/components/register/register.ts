@@ -154,6 +154,7 @@ export class Register implements OnInit {
       },
     });
   }
+
   login(data: UserLogin) {
     this.authService.login(data).subscribe({
       next: (res) => {

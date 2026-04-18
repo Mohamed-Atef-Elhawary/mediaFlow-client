@@ -52,8 +52,10 @@ export const routes: Routes = [
   ///////////////////////////////////////////////////////////
 
   {
-    path: 'r',
+    path: 'a',
     loadComponent: () =>
-      import('./components/related-doctors/related-doctors').then((c) => c.RelatedDoctors),
+      import('./components/appointment-booking/appointment-booking').then(
+        (c) => c.AppointmentBooking,
+      ),
   },
 ];

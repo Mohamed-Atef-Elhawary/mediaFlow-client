@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-
+import { NgClass } from '@angular/common';
+import { Component, input, OnInit, signal } from '@angular/core';
+import { AppointmentRequest } from '../../interfaces/appointment-request';
+import { UserService } from '../../services/user-service';
+import { ToastrService } from 'ngx-toastr';
+import { toastConfig } from '../../config/toastConfig';
 @Component({
   selector: 'app-appointment-booking',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './appointment-booking.html',
   styleUrl: './appointment-booking.css',
 })
@@ -16,12 +20,20 @@ export class AppointmentBooking implements OnInit {
     slots: { time: string }[];
   }[] = [];
 
-  bookIndex: number = 0;
+  //dayIndex we use it to make bg-color
+  dayIndex = signal<number | null>(null);
 
+  appointmentTime = signal<string | undefined>(undefined);
+  appointmentDate = signal<number | undefined>(undefined);
+  docId = input.required<string>();
+  constructor(
+    private userService: UserService,
+    private toastr: ToastrService,
+  ) {}
   ngOnInit() {
     this.getAvailableBook();
-    this.getDateNumber('SUN');
   }
+
   getAvailableBook() {
     const today = new Date();
     for (let i = 0; i < 7; i++) {
@@ -60,15 +72,34 @@ export class AppointmentBooking implements OnInit {
       });
     }
 
-    console.log(this.availableBook);
+    // console.log(this.availableBook);
   }
+
   getDateNumber(dayName: string) {
     let myObj = this.availableBook.find((item) => item.dayName == dayName);
     this.dayNumber = myObj?.date;
   }
-  getTimeArray(dayName: string) {
+  getTimeArrayAndUpdateAppointmentDate(dayName: string) {
     let myObj = this.availableBook.find((item) => item.dayName == dayName);
     this.timeArray = myObj?.slots || [];
-    console.log(this.timeArray);
+    this.appointmentDate.set(myObj?.date);
+  }
+
+  bookAppointment() {
+    let docId = this.docId();
+    let appointmentDate = this.appointmentDate();
+    let appointmentTime = this.appointmentTime();
+
+    if (docId && appointmentDate && appointmentTime) {
+      const appointmentData: AppointmentRequest = {
+        docId,
+        appointmentDate,
+        appointmentTime,
+      };
+
+      this.userService.bookAppointment(appointmentData).subscribe(console.log);
+    } else {
+      this.toastr.error('provide day and time', 'Missing data', toastConfig.errorConfig);
+    }
   }
 }

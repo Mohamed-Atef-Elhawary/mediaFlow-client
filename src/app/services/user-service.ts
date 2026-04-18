@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ApiResponse } from '../interfaces/api-response';
 import { ApiUserInfo } from '../interfaces/api-user-info';
 import { LoginResponse } from '../interfaces/login-response';
+import { AppointmentRequest } from '../interfaces/appointment-request';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,14 @@ export class UserService {
 
   updateProfile(data: FormData): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${environment.backendUrl}user/update`, data, {
+      headers: new HttpHeaders({
+        authorization: `Bearer ${this.auth.userToken()}`,
+      }),
+    });
+  }
+
+  bookAppointment(data: AppointmentRequest): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${environment.backendUrl}user/book`, data, {
       headers: new HttpHeaders({
         authorization: `Bearer ${this.auth.userToken()}`,
       }),

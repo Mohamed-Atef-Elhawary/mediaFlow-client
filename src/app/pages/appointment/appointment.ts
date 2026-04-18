@@ -9,9 +9,10 @@ import { faX } from '@fortawesome/free-solid-svg-icons';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { CurrencyPipe } from '@angular/common';
 import { RelatedDoctors } from '../../components/related-doctors/related-doctors';
+import { AppointmentBooking } from '../../components/appointment-booking/appointment-booking';
 @Component({
   selector: 'app-appointment',
-  imports: [FontAwesomeModule, CurrencyPipe, RelatedDoctors],
+  imports: [FontAwesomeModule, CurrencyPipe, RelatedDoctors, AppointmentBooking],
   templateUrl: './appointment.html',
   styleUrl: './appointment.css',
 })
@@ -43,6 +44,7 @@ export class Appointment implements OnInit {
       next: (res) => {
         if (res.success) {
           this.myDoctor = res.data;
+          console.log(res.data);
           this.cdr.detectChanges();
         }
       },

@@ -64,6 +64,7 @@ export class AuthService {
       localStorage.setItem('userImage', data.image);
       this.userImage.set(data.image);
     }
+
     localStorage.setItem('userName', data.name);
     this.userName.set(data.name);
     this.userInfo.set(data);
