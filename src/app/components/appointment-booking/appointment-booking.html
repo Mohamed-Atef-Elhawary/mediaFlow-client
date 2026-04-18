@@ -1,0 +1,17 @@
+<section class="flex flex-col gap-6 bg-gray-100 p-4">
+  <h1>Booking Appointment</h1>
+  <div class="flex gap-6">
+    @for (day of daysOfWeek; track $index) {
+      <div class="flex flex-col items-center" (click)="getTimeArray(day)">
+        <p>{{ day }}</p>
+        <p>{{ getDateNumber(day) }}{{ dayNumber }}</p>
+      </div>
+    }
+  </div>
+  <div class="flex gap-8 overflow-scroll w-full">
+    @for (time of timeArray; track $index) {
+      <p class="bg-amber-200 w-fit py-1 px-2 hover:bg-red-500 shrink-0">{{ time.time }}</p>
+    }
+  </div>
+  <button></button>
+</section>
