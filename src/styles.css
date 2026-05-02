@@ -13,7 +13,3 @@
 ::-webkit-scrollbar {
   @apply hidden;
 }
-
-/* html {
-  scroll-behavior: smooth;
-} */

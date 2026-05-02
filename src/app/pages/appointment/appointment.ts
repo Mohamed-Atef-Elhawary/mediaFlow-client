@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { DoctorService } from '../../services/doctor-service';
 import { ActivatedRoute } from '@angular/router';
 import { DoctorData } from '../../interfaces/doctor-data';
@@ -21,7 +21,8 @@ export class Appointment implements OnInit {
   checkIcon = faCheck;
   xIcon = faX;
   infoIcon = faCircleInfo;
-  myDoctor: DoctorData = {} as DoctorData;
+
+  myDoctor = signal<DoctorData>({} as DoctorData);
   constructor(
     private doctor: DoctorService,
     private route: ActivatedRoute,
@@ -43,9 +44,8 @@ export class Appointment implements OnInit {
     this.doctor.doctor(this.docId).subscribe({
       next: (res) => {
         if (res.success) {
-          this.myDoctor = res.data;
-          // console.log(this.myDoctor);
-          // console.log(res.data);
+          this.myDoctor.set(res.data);
+          console.log(this.myDoctor);
           this.cdr.detectChanges();
         }
       },

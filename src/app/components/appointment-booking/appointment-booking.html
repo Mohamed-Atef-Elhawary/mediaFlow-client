@@ -6,11 +6,11 @@
         [ngClass]="
           dayIndex() === i ? 'bg-primary text-white' : 'bg-gray-100 border-2 border-gray-300'
         "
-        class="shrink-0 flex flex-col items-center text-lg md:text-[1.5vw] w-[50px] md:w-[3.5vw] p-1 overflow-hidden"
-        (click)="getTimeArrayAndUpdateAppointmentDate(day); dayIndex.set(i); (day)"
+        class="shrink-0 flex flex-col items-center text-lg md:text-[1.5vw] w-[50px] md:w-[3.5vw] p-1 overflow-hidden cursor-pointer"
+        (click)="getTimeArrayAndUpdateAppointmentDate(day.dayName); dayIndex.set(i)"
       >
-        <p>{{ day }}</p>
-        <p>{{ getDateNumber(day) }}{{ dayNumber }}</p>
+        <p>{{ day.dayName }}</p>
+        <p>{{ day.dayNumber }}</p>
       </div>
     }
   </div>
@@ -23,7 +23,7 @@
             : 'bg-gray-100 border-2 border-gray-300'
         "
         (click)="appointmentTime.set(time.time)"
-        class="bg-amber-200 w-fit py-1 px-2 md:text-[1.5vw] shrink-0"
+        class="bg-amber-200 w-fit py-1 px-2 md:text-[1.5vw] shrink-0 cursor-pointer"
       >
         {{ time.time }}
       </p>

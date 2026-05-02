@@ -42,10 +42,14 @@
             Appointment Time: <span class="text-secondary">{{ appointment.appointmentTime }}</span>
           </p>
           <button
+            [ngClass]="{
+              'cursor-pointer': !appointment.cancelled,
+              'cursor-not-allowed': appointment.cancelled,
+            }"
             (click)="cancelAppointment(appointment._id)"
             class="border-2 border-secondary sm:w-[50%] md:w-full py-1 px-3 md:text-[1.4vw] font-medium text-dark hover:text-white hover:bg-primary hover:border-0"
           >
-            Cancel Appointment
+            {{ appointment.cancelled ? 'cancelled?' : 'Cancel Appointment' }}
           </button>
         </div>
       </div>

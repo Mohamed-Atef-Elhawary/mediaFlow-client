@@ -47,12 +47,10 @@ export class Navbar implements AfterViewInit {
   ngAfterViewInit(): void {
     this.getUserMenu();
     this.getNavLinks();
-    console.log('defore error');
-    console.log('authView', this.authService.authView());
+
     document.addEventListener('click', (event) => {
       if (this.authService.authView() === 'authorized') {
         if (event.target !== this.mydiv.nativeElement) {
-          // this.showUserMenu.set(false);
           this.authService.showUserMenu.set(false);
         }
       }
@@ -61,7 +59,6 @@ export class Navbar implements AfterViewInit {
 
   async getUserMenu() {
     const menuComponent = await import('../user-menu/user-menu').then((c) => c.UserMenu);
-    // console.log('menuComponent', menuComponent);
     this.myMenue.clear();
     this.myMenue.createComponent(menuComponent);
   }
@@ -93,11 +90,9 @@ export class Navbar implements AfterViewInit {
     if (this.authView() === 'authorized') {
       this.router.navigate(['/home']);
     } else {
-      this.router.navigate(['outer']);
       this.authService.authView.set('outer');
+      this.router.navigate(['outer']);
     }
-    console.log('authView', this.authView());
-    console.log('authView service', this.authService.authView());
   }
   update(state: AuthView) {
     this.router.navigate(['register', state]);

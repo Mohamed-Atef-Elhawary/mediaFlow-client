@@ -54,10 +54,7 @@ export const routes: Routes = [
   ///////////////////////////////////////////////////////////
 
   {
-    path: 'a',
-    loadComponent: () =>
-      import('./components/appointment-booking/appointment-booking').then(
-        (c) => c.AppointmentBooking,
-      ),
+    path: 'rank',
+    loadComponent: () => import('./components/doc-rank/doc-rank').then((c) => c.DocRank),
   },
 ];

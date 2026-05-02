@@ -21,20 +21,6 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
   ) {
-    // effect(
-    //   () => {
-    //     const uToken = this.userToken();
-    //     if (uToken) {
-    //       localStorage.setItem('userToken', uToken);
-    //       this.authView.set('authorized');
-    //     } else {
-    //       localStorage.removeItem('userToken');
-    //       this.authView.set('outer');
-    //     }
-    //   },
-    //   { allowSignalWrites: true },
-    // );
-
     let jsonObj = localStorage.getItem('userInfo');
     if (jsonObj) {
       this.userInfo.set(JSON.parse(jsonObj));

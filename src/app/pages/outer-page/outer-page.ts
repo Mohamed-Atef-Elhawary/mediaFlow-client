@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth-service';
 import { RouterLink } from '@angular/router';
 import { PhotoService } from '../../services/photo-service';
 
@@ -11,11 +10,7 @@ import { PhotoService } from '../../services/photo-service';
 })
 export class OuterPage {
   outerPhoto: string;
-  constructor(
-    private auth: AuthService,
-    private photo: PhotoService,
-  ) {
+  constructor(private photo: PhotoService) {
     this.outerPhoto = this.photo.static.outer;
-    console.log('from outer ', this.auth.authView());
   }
 }

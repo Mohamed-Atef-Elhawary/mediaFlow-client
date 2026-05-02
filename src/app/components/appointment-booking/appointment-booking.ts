@@ -1,5 +1,14 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectorRef, Component, effect, Input, input, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  effect,
+  Input,
+  input,
+  OnChanges,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { AppointmentRequest } from '../../interfaces/appointment-request';
 import { UserService } from '../../services/user-service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,8 +21,16 @@ import { DoctorService } from '../../services/doctor-service';
   templateUrl: './appointment-booking.html',
   styleUrl: './appointment-booking.css',
 })
-export class AppointmentBooking implements OnInit {
-  daysOfWeek: string[] = ['SAT', 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI'];
+export class AppointmentBooking implements OnChanges {
+  daysOfWeek: { dayName: string; dayNumber: number }[] = [
+    { dayName: 'SAT', dayNumber: 0 },
+    { dayName: 'SUN', dayNumber: 0 },
+    { dayName: 'MON', dayNumber: 0 },
+    { dayName: 'TUE', dayNumber: 0 },
+    { dayName: 'WED', dayNumber: 0 },
+    { dayName: 'THU', dayNumber: 0 },
+    { dayName: 'FRI', dayNumber: 0 },
+  ];
   dayNumber: number | undefined = undefined;
 
   timeArray: { time: string }[] = [];
@@ -39,13 +56,9 @@ export class AppointmentBooking implements OnInit {
     private cdr: ChangeDetectorRef,
     private toastr: ToastrService,
   ) {}
-  ngOnInit() {
-    // this.getDoctor();
-    // this.getAvailableBook();
-  }
+
   ngOnChanges() {
-    // console.log('kkkkkkkkkkkkkkkk');
-    // console.log(this.docId);
+    console.log(this.docId);
     if (this.docId) {
       this.getDoctor();
     }
@@ -82,8 +95,11 @@ export class AppointmentBooking implements OnInit {
       }
 
       let availableTime = [];
-      let dayName = this.daysOfWeek[(currentDate.getDay() + 1) % this.daysOfWeek.length];
+      let dayName = this.daysOfWeek[(currentDate.getDay() + 1) % this.daysOfWeek.length].dayName;
       let date = currentDate.getDate();
+      this.daysOfWeek[(currentDate.getDay() + 1) % this.daysOfWeek.length].dayNumber = date;
+      this.cdr.detectChanges();
+      console.log(this.daysOfWeek);
       currentDate.setSeconds(0, 0);
       while (endDate >= currentDate) {
         let formatedTime = currentDate.toLocaleTimeString([], {
@@ -110,11 +126,12 @@ export class AppointmentBooking implements OnInit {
         slots: availableTime,
       });
     }
-
+    this.cdr.detectChanges();
     console.log(this.availableBook);
   }
 
   getDateNumber(dayName: string) {
+    console.log('dddddddddddd');
     let myObj = this.availableBook.find((item) => item.dayName == dayName);
     this.dayNumber = myObj?.date;
   }
@@ -136,7 +153,17 @@ export class AppointmentBooking implements OnInit {
         appointmentTime,
       };
 
-      this.userService.bookAppointment(appointmentData).subscribe(console.log);
+      this.userService.bookAppointment(appointmentData).subscribe({
+        next: (res) => {
+          if (res.success) {
+            this.toastr.success(res.message, 'success', toastConfig.successConfig);
+            console.log(res.message);
+          }
+        },
+        error: (err) => {
+          this.toastr.error(err.message, 'Error', toastConfig.errorConfig);
+        },
+      });
     } else {
       this.toastr.error('provide day and time', 'Missing data', toastConfig.errorConfig);
     }

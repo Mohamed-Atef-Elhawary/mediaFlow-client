@@ -1,0 +1,16 @@
+<div>
+  <div>
+    <div class="flex gap-2">
+      @for (icon of [1, 2, 3, 4, 5]; track $index) {
+        <div (mouseenter)="setColor($event, icon)" class="text-gray-200">
+          <fa-icon [icon]="starIcon"></fa-icon>
+        </div>
+      }
+    </div>
+    <div>
+      <button>Write a review</button>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+</div>

@@ -16,8 +16,6 @@ import { toastConfig } from '../../config/toastConfig';
   styleUrl: './register.css',
 })
 export class Register implements OnInit {
-  // loginForm!: FormGroup;
-  // registerForm!: FormGroup;
   userForm!: FormGroup;
   logo: string;
   constructor(
@@ -35,13 +33,11 @@ export class Register implements OnInit {
     this.route.paramMap.subscribe((param) => {
       let state = param.get('state');
       if (state === 'signin' || state === 'signup') {
-        // console.log(state);
         this.userFormCreator();
         this.authService.authView.set(state);
         if (state === 'signup') {
           this.modifyUserForm(state);
         }
-        // console.log('fffffffffffffff', this.userForm);
       }
     });
   }
@@ -52,14 +48,9 @@ export class Register implements OnInit {
 
   update(state: AuthView) {
     this.router.navigate(['/register', state]);
-    // this.modifyUserForm(state);
-    // this.authService.authView.set(state);
-    // console.log('this.authView()', this.authView());
-    // console.log('this.authService.authView()', this.authService.authView());
   }
 
   userFormCreator() {
-    // console.log('ccccccccccccccccccccccccccccc');
     this.userForm = this.fb.group({
       email: [
         '',
@@ -80,21 +71,6 @@ export class Register implements OnInit {
           nonNullable: true,
         },
       ],
-
-      // rePassword: [
-      //   '',
-      //   this.authView() === 'signup'
-      //     ? {
-      //         validators: [
-      //           Validators.required,
-      //           Validators.pattern(/^\S+/),
-      //           Validators.minLength(8),
-      //           Validators.maxLength(20),
-      //         ],
-      //         nonNullable: true,
-      //       }
-      //     : [],
-      // ],
     });
   }
 
@@ -166,7 +142,6 @@ export class Register implements OnInit {
           this.router.navigate(['/home']);
         } else {
           this.toastr.error(res.message, 'MediaFlow', toastConfig.errorConfig);
-          // this.authService.updateAuthState(res.data.token);
         }
       },
       error: (err) => {
@@ -175,62 +150,3 @@ export class Register implements OnInit {
     });
   }
 }
-
-// registerFormCreator() {
-//   this.registerForm = this.fb.group({
-//     fullName: [
-//       '',
-//       {
-//         validators: [
-//           Validators.required,
-//           Validators.pattern(/^[A-Za-z]+(\s[A-Za-z]+)*$/),
-//           Validators.minLength(2),
-//           Validators.maxLength(20),
-//         ],
-//         nonNullable: true,
-//       },
-//     ],
-//     email: [
-//       '',
-//       {
-//         validators: [Validators.required, Validators.email],
-//         nonNullable: true,
-//       },
-//     ],
-//     password: [
-//       '',
-//       {
-//         validators: [
-//           Validators.required,
-//           Validators.pattern(/^\S+/),
-//           Validators.minLength(8),
-//           Validators.maxLength(20),
-//         ],
-//         nonNullable: true,
-//       },
-//     ],
-//   });
-// }
-// loginFormCreator() {
-//   this.loginForm = this.fb.group({
-//     email: [
-//       '',
-//       {
-//         validators: [Validators.required, Validators.email],
-//         nonNullable: true,
-//       },
-//     ],
-//     password: [
-//       '',
-//       {
-//         validators: [
-//           Validators.required,
-//           Validators.pattern(/^\S+/),
-//           Validators.minLength(8),
-//           Validators.maxLength(20),
-//         ],
-//         nonNullable: true,
-//       },
-//     ],
-//   });
-// }

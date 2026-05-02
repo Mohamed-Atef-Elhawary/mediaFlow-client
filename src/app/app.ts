@@ -1,5 +1,5 @@
 import { Component, computed, Signal, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
 import { Footer } from './components/footer/footer';
 import { AuthService } from './services/auth-service';
@@ -14,8 +14,9 @@ import { AuthView } from './types/authType';
 export class App {
   protected readonly title = signal('mediaFlow');
 
-  constructor(private auth: AuthService) {
-    console.log(this.auth.authView());
-  }
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+  ) {}
   authView: Signal<AuthView> = computed(() => this.auth.authView());
 }
