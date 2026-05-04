@@ -1,0 +1,42 @@
+<div class="flex flex-col gap-6">
+  <!-- doc info -->
+  <div class="flex gap-2 items-center">
+    <div class="w-[60px] h-[60px] rounded-xl overflow-hidden">
+      <img class="w-full h-full object-cover" [src]="getDocData()?.image" />
+    </div>
+    <div>
+      <h2>{{ getDocData()?.name }}</h2>
+      <p>Rate this doctor</p>
+    </div>
+  </div>
+  <!-- user info -->
+  <div class="flex gap-2 items-center">
+    <div class="w-[50px] h-[50px] rounded-full overflow-hidden">
+      <img class="w-full h-full object-cover" [src]="userData()?.image" />
+    </div>
+    <div>
+      <h2>{{ userData()?.name }}</h2>
+    </div>
+  </div>
+
+  <form [formGroup]="reviewForm">
+    <!--start stars -->
+
+    <div class="flex gap-2 text-xl lg:text-[1.4vw]">
+      @for (rank of [1, 2, 3, 4, 5]; track $index) {
+        <div appReviewDirective [index]="$index" class="text-gray-200 cursor-pointer">
+          <fa-icon [icon]="starIcon"></fa-icon>
+        </div>
+      }
+    </div>
+
+    <!-- textArea -->
+    <div>
+      <textarea formControlName="comment"></textarea>
+    </div>
+    <!-- submit -->
+    <div class="bg-primary text-white w-fit rounded-xl">
+      <button class="py-1 px-4 cursor-pointer font-bold">submit</button>
+    </div>
+  </form>
+</div>

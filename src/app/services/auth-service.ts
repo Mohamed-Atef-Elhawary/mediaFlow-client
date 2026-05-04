@@ -1,4 +1,4 @@
-import { effect, Injectable, signal } from '@angular/core';
+import { effect, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { AuthView } from '../types/authType';
 import { UserRegister } from '../interfaces/user-register';
 import { UserLogin } from '../interfaces/user-login';
@@ -16,6 +16,9 @@ import { ApiUserInfo } from '../interfaces/api-user-info';
 export class AuthService {
   userInfo = signal<ApiUserInfo | null>(null);
   showUserMenu = signal<boolean>(false);
+  userData: WritableSignal<LoginResponse | null> = signal(this.getUserData());
+
+  authView = signal<AuthView>(this.userData()?.token ? 'authorized' : 'outer');
 
   constructor(
     private http: HttpClient,
@@ -26,19 +29,19 @@ export class AuthService {
       this.userInfo.set(JSON.parse(jsonObj));
     }
   }
-  userToken = signal<string | null>(localStorage.getItem('userToken'));
-  userImage = signal<string | null>(localStorage.getItem('userImage'));
-  userName = signal<string | null>(localStorage.getItem('userName'));
-  authView = signal<AuthView>(this.userToken() ? 'authorized' : 'outer');
 
+  getUserData(): LoginResponse | null {
+    let jsonUserData = localStorage.getItem('userData');
+    if (jsonUserData) {
+      return JSON.parse(jsonUserData);
+    }
+    return null;
+  }
   updateAuthState(data: LoginResponse) {
     if (data) {
-      localStorage.setItem('userToken', data.token);
-      localStorage.setItem('userImage', data.image);
-      localStorage.setItem('userName', data.name);
-      this.userToken.set(data.token);
-      this.userImage.set(data.image);
-      this.userName.set(data.name);
+      let jsonUserData = JSON.stringify(data);
+      localStorage.setItem('userData', jsonUserData);
+      this.userData.set(data);
       this.authView.set('authorized');
       this.router.navigate(['/home']);
     } else {
@@ -46,29 +49,29 @@ export class AuthService {
     }
   }
 
-  userDataSetser(data: ApiUserInfo): void {
-    if (data.image) {
-      localStorage.setItem('userImage', data.image);
-      this.userImage.set(data.image);
+  userDataSeter(data: ApiUserInfo): void {
+    let newUserData: LoginResponse = this.userData() || ({} as LoginResponse);
+    const { image, name } = data;
+    if (image) {
+      newUserData.image = image;
     }
+    newUserData.name = name;
+    this.userData.update((v) => ({ ...v, ...newUserData }));
+    localStorage.setItem('userData', JSON.stringify(this.userData()));
 
-    localStorage.setItem('userName', data.name);
-    this.userName.set(data.name);
     this.userInfo.set(data);
     localStorage.setItem('userInfo', JSON.stringify(data));
   }
-  userDataRemover() {
+  // userDataRemover() {
+  //   localStorage.removeItem('userInfo');
+  //   this.userInfo.set(null);
+  // }
+  signOut() {
+    localStorage.removeItem('userData');
+    this.userData.set(null);
     localStorage.removeItem('userInfo');
     this.userInfo.set(null);
-  }
-  signOut() {
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('userImage');
-    localStorage.removeItem('userName');
-    this.userDataRemover();
-    this.userToken.set(null);
-    this.userImage.set(null);
-    this.userName.set(null);
+
     this.authView.set('outer');
     this.router.navigate(['/outer']);
   }

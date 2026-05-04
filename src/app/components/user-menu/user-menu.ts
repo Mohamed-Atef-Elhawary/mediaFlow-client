@@ -22,10 +22,10 @@ export class UserMenu {
 
   constructor(private auth: AuthService) {}
   userImage = computed(() => {
-    return this.auth.userImage();
+    return this.auth.userData()?.image;
   });
   userName = computed(() => {
-    return this.auth.userName();
+    return this.auth.userData()?.name;
   });
 
   signOut() {

@@ -84,7 +84,7 @@ export class Navbar implements AfterViewInit {
     return this.authService.authView();
   });
   userImage = computed(() => {
-    return this.authService.userImage();
+    return this.authService.userData()?.image;
   });
   signinOrHome() {
     if (this.authView() === 'authorized') {

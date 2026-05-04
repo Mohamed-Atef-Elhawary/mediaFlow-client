@@ -58,7 +58,7 @@ export class AppointmentBooking implements OnChanges {
   ) {}
 
   ngOnChanges() {
-    console.log(this.docId);
+    // console.log(this.docId);
     if (this.docId) {
       this.getDoctor();
     }
@@ -99,7 +99,7 @@ export class AppointmentBooking implements OnChanges {
       let date = currentDate.getDate();
       this.daysOfWeek[(currentDate.getDay() + 1) % this.daysOfWeek.length].dayNumber = date;
       this.cdr.detectChanges();
-      console.log(this.daysOfWeek);
+      // console.log(this.daysOfWeek);
       currentDate.setSeconds(0, 0);
       while (endDate >= currentDate) {
         let formatedTime = currentDate.toLocaleTimeString([], {
@@ -127,7 +127,7 @@ export class AppointmentBooking implements OnChanges {
       });
     }
     this.cdr.detectChanges();
-    console.log(this.availableBook);
+    // console.log(this.availableBook);
   }
 
   getDateNumber(dayName: string) {

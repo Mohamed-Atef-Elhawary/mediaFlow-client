@@ -57,4 +57,9 @@ export const routes: Routes = [
     path: 'rank',
     loadComponent: () => import('./components/doc-rank/doc-rank').then((c) => c.DocRank),
   },
+  {
+    path: 'review',
+    loadComponent: () =>
+      import('./components/write-review/write-review').then((c) => c.WriteReview),
+  },
 ];

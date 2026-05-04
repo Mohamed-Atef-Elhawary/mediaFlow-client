@@ -1,4 +1,6 @@
-export interface DoctorData {
+import { DoctorRank } from './doctor-rank';
+
+export interface DoctorData extends DoctorRank {
   about: string;
   address: { line1: 'string'; line2: string };
   appointmentBooked: any;

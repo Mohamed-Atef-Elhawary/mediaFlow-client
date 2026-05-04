@@ -21,7 +21,7 @@ export class UserService {
     // console.log(this.auth.userToken());
     return this.http.get<ApiResponse>(`${environment.backendUrl}user/profile`, {
       headers: new HttpHeaders({
-        authorization: `Bearer ${this.auth.userToken()}`,
+        authorization: `Bearer ${this.auth.userData()?.token}`,
       }),
     });
   }
@@ -29,7 +29,7 @@ export class UserService {
   updateProfile(data: FormData): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${environment.backendUrl}user/update`, data, {
       headers: new HttpHeaders({
-        authorization: `Bearer ${this.auth.userToken()}`,
+        authorization: `Bearer ${this.auth.userData()?.token}}`,
       }),
     });
   }
@@ -37,14 +37,14 @@ export class UserService {
   bookAppointment(data: AppointmentRequest): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${environment.backendUrl}user/book`, data, {
       headers: new HttpHeaders({
-        authorization: `Bearer ${this.auth.userToken()}`,
+        authorization: `Bearer ${this.auth.userData()?.token}}`,
       }),
     });
   }
   appointmentsList(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(`${environment.backendUrl}user/appointments`, {
       headers: new HttpHeaders({
-        authorization: `Bearer ${this.auth.userToken()}`,
+        authorization: `Bearer ${this.auth.userData()?.token}}`,
       }),
     });
   }
@@ -54,7 +54,7 @@ export class UserService {
       { appointmentId },
       {
         headers: new HttpHeaders({
-          authorization: `Bearer ${this.auth.userToken()}`,
+          authorization: `Bearer ${this.auth.userData()?.token}}`,
         }),
       },
     );

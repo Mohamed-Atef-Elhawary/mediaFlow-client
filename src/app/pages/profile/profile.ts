@@ -30,7 +30,7 @@ export class Profile implements OnInit {
 
     if (resolveObj.success == true) {
       console.log(resolveObj.data);
-      this.auth.userDataSetser(resolveObj.data);
+      this.auth.userDataSeter(resolveObj.data);
     }
 
     // this.userService.profile().subscribe({

@@ -38,7 +38,7 @@ export class ProfileSettings {
     const resolveObj = this.route.snapshot;
     const infoObj = resolveObj.data['profileResolver'];
     if (infoObj.success) {
-      this.auth.userDataSetser(infoObj.data);
+      this.auth.userDataSeter(infoObj.data);
       this.prepareUserInfo();
     }
     // console.log(resolveObj.data['profileResolver']);
@@ -128,7 +128,7 @@ export class ProfileSettings {
     }
     this.userService.updateProfile(formData).subscribe({
       next: (res) => {
-        this.auth.userDataSetser(res.data);
+        this.auth.userDataSeter(res.data);
         this.router.navigate(['/home']);
       },
       error: (err) => {

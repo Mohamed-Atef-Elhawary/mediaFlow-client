@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, OnInit, signal } from '@angular/core';
 import { DoctorService } from '../../services/doctor-service';
 import { ActivatedRoute } from '@angular/router';
 import { DoctorData } from '../../interfaces/doctor-data';
@@ -10,9 +10,11 @@ import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { CurrencyPipe } from '@angular/common';
 import { RelatedDoctors } from '../../components/related-doctors/related-doctors';
 import { AppointmentBooking } from '../../components/appointment-booking/appointment-booking';
+import { DocRank } from '../../components/doc-rank/doc-rank';
+import { DoctorRank } from '../../interfaces/doctor-rank';
 @Component({
   selector: 'app-appointment',
-  imports: [FontAwesomeModule, CurrencyPipe, RelatedDoctors, AppointmentBooking],
+  imports: [FontAwesomeModule, CurrencyPipe, RelatedDoctors, AppointmentBooking, DocRank],
   templateUrl: './appointment.html',
   styleUrl: './appointment.css',
 })
@@ -23,6 +25,13 @@ export class Appointment implements OnInit {
   infoIcon = faCircleInfo;
 
   myDoctor = signal<DoctorData>({} as DoctorData);
+  ranking = computed<DoctorRank>(() => {
+    return {
+      rank: this.myDoctor().rank,
+      totalReviewers: this.myDoctor().totalReviewers,
+      ratingDistribution: this.myDoctor().ratingDistribution,
+    };
+  });
   constructor(
     private doctor: DoctorService,
     private route: ActivatedRoute,
@@ -45,7 +54,8 @@ export class Appointment implements OnInit {
       next: (res) => {
         if (res.success) {
           this.myDoctor.set(res.data);
-          console.log(this.myDoctor);
+          localStorage.setItem('myDoctor', JSON.stringify(this.myDoctor()));
+          console.log(this.myDoctor());
           this.cdr.detectChanges();
         }
       },
