@@ -1,38 +1,53 @@
 <div class="flex flex-col gap-6">
   <!-- doc info -->
   <div class="flex gap-2 items-center">
-    <div class="w-[60px] h-[60px] rounded-xl overflow-hidden">
-      <img class="w-full h-full object-cover" [src]="getDocData()?.image" />
+    <div class="w-[60px] h-[60px] lg:w-[6vw] lg:h-[6vw] rounded-xl overflow-hidden">
+      <img class="w-full h-full object-cover" [src]="doctorData().image" />
     </div>
     <div>
-      <h2>{{ getDocData()?.name }}</h2>
-      <p>Rate this doctor</p>
+      <h2 class="text-xl lg:text-[1.4vw]">{{ doctorData().name }}</h2>
+      <p class="text-sm lg:text-[1.2vw] text-secondary">Rate this doctor</p>
     </div>
   </div>
   <!-- user info -->
   <div class="flex gap-2 items-center">
-    <div class="w-[50px] h-[50px] rounded-full overflow-hidden">
+    <div class="w-[50px] h-[50px] lg:w-[5vw] lg:h-[5vw] rounded-full overflow-hidden">
       <img class="w-full h-full object-cover" [src]="userData()?.image" />
     </div>
     <div>
-      <h2>{{ userData()?.name }}</h2>
+      <h2 class="lg:text-[1.3vw]">{{ userData()?.name }}</h2>
     </div>
   </div>
 
-  <form [formGroup]="reviewForm">
+  <form class="flex flex-col gap-6" [formGroup]="reviewForm" (ngSubmit)="submit()">
     <!--start stars -->
 
     <div class="flex gap-2 text-xl lg:text-[1.4vw]">
       @for (rank of [1, 2, 3, 4, 5]; track $index) {
-        <div appReviewDirective [index]="$index" class="text-gray-200 cursor-pointer">
+        <div
+          (click)="updateDocRank(rank)"
+          appReviewDirective
+          [index]="$index"
+          class="text-gray-200 cursor-pointer"
+        >
           <fa-icon [icon]="starIcon"></fa-icon>
         </div>
       }
     </div>
 
     <!-- textArea -->
+    <div class="w-full h-[60px] overflow-scroll">
+      <textarea
+        class="block outline-0 border-2 px-2 caret-primary text-secondary pt-[15px] border-primary h-full w-full overflow-scroll"
+        placeholder="Describe your experience"
+        formControlName="comment"
+      ></textarea>
+    </div>
+    <!-- des -->
     <div>
-      <textarea formControlName="comment"></textarea>
+      <p class="text-sm lg:text-[1.2vw] text-secondary">
+        Reviews are public and include your info. Everyone can see your name and photo.
+      </p>
     </div>
     <!-- submit -->
     <div class="bg-primary text-white w-fit rounded-xl">

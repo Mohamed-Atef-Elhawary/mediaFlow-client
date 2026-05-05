@@ -1,4 +1,13 @@
-import { Component, computed, OnInit, signal, Signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  computed,
+  input,
+  OnInit,
+  signal,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import { AuthService } from '../../services/auth-service';
 
 import { LoginResponse } from '../../interfaces/login-response';
@@ -6,6 +15,7 @@ import { ReviewDirective } from '../../directives/review';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RankingService } from '../../services/ranking-service';
 
 @Component({
   selector: 'app-write-review',
@@ -16,30 +26,35 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class WriteReview implements OnInit {
   starIcon = faStar;
   reviewForm!: FormGroup;
-  rate: WritableSignal<number> = signal(0);
+
   constructor(
     private authService: AuthService,
+    private cdr: ChangeDetectorRef,
+    private rankingService: RankingService,
     private fb: FormBuilder,
   ) {}
   userData: Signal<LoginResponse | null> = computed(() => this.authService.userData());
+  doctorData = input.required<{ name: string; _id: string; image: string }>();
 
-  getDocData(): { name: String; image: string; id: string } | null {
-    let myDoctor = localStorage.getItem('myDoctor');
-    if (myDoctor) {
-      let data = JSON.parse(myDoctor);
-      return { name: data.name, image: data.image, id: data._id };
-    }
-
-    return null;
-  }
   ngOnInit() {
     this.makeForm();
+    console.log(
+      '  doctorData = input.required<{ name: string; id: string; image: string }>();',
+      this.doctorData(),
+    );
   }
   makeForm() {
     this.reviewForm = this.fb.group({
-      docId: [this.getDocData()?.id],
-      rating: [this.rate(), [Validators.required, Validators.min(1), Validators.max(5)]],
+      docId: [this.doctorData()._id],
       comment: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(300)]],
     });
+  }
+  updateDocRank(rank: number): void {
+    this.rankingService.docRank.set(rank);
+  }
+  submit() {
+    this.reviewForm.addControl('rank', this.fb.control(this.rankingService.docRank()));
+    console.log(this.reviewForm.value);
+    console.log('rankingService.docRank', this.rankingService.docRank());
   }
 }

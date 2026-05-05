@@ -1,13 +1,25 @@
-import { Directive, Host, HostListener, input } from '@angular/core';
+import { Directive, ElementRef, Host, HostListener, input, OnInit } from '@angular/core';
+import { RankingService } from '../services/ranking-service';
 
 @Directive({
   selector: '[appReviewDirective]',
 })
-export class ReviewDirective {
+export class ReviewDirective implements OnInit {
   index = input.required<number>();
-  // rank = input.required<number>();
-  constructor() {}
 
+  constructor(
+    private rankingService: RankingService,
+    private ele: ElementRef,
+  ) {}
+  ngOnInit(): void {
+    const currentRanc: number = this.rankingService.docRank();
+    console.log(currentRanc);
+    let children = [...this.ele.nativeElement.parentElement.children];
+    for (let i = 0; i < currentRanc; i++) {
+      // console.log('children[i]', children[i]);
+      children[i].firstChild.classList.add('text-primary');
+    }
+  }
   @HostListener('mouseenter', ['$event']) onEnter(event: any) {
     let children = event.target.parentElement.children;
     for (let i = 0; i <= this.index(); i++) {

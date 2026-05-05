@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 lg:pr-[20vw]">
   <div>
     <h2 class="text-xl md:text-[1.4vw] font-semibold">Rate this doctor</h2>
     <p class="md:text-[1.3vw] text-secondary">Tell others what you think.</p>
@@ -7,16 +7,27 @@
   <div class="flex flex-col gap-3 lg:flex-row lg:justify-between">
     <div class="flex gap-2 text-xl lg:text-[1.4vw]">
       @for (rank of [1, 2, 3, 4, 5]; track $index) {
-        <div appReviewDirective [index]="$index" class="text-gray-200 cursor-pointer">
+        <div
+          (click)="emitReviewing(rank)"
+          appReviewDirective
+          [index]="$index"
+          class="text-gray-200 cursor-pointer"
+        >
           <fa-icon [icon]="starIcon"></fa-icon>
         </div>
       }
     </div>
-    <div class="bg-primary text-white w-fit rounded-xl">
-      <button class="py-1 px-2 cursor-pointer font-bold">Write a review</button>
+    <div class="text-white w-fit rounded-xl">
+      <button
+        (click)="emitReviewing(0)"
+        class="bg-primary text-white w-fit rounded-xl py-1 px-2 cursor-pointer font-bold"
+      >
+        Write a review
+      </button>
     </div>
   </div>
   <!--end stars -->
+
   <!-- start Ratings and reviews  -->
   <div>
     <div class="flex items-center gap-2 text-xl md:text-[1.4vw]">
@@ -25,7 +36,10 @@
     </div>
   </div>
   <!-- end Ratings and reviews  -->
+
+  <!-- srart docRank -->
   <div class="flex gap-4">
+    <!-- startrank -->
     <div class="w-fit sm:w-[20%] shrink-0">
       <p class="text-[50px]">{{ docRank().rank.decimal }}.{{ docRank().rank.frag }}</p>
       <div class="flex gap-[2px]">
@@ -50,9 +64,10 @@
           </div>
         }
       </div>
+
       <p class="text-secondary">{{ docRank().totalReviewers }}</p>
     </div>
-
+    <!-- endrank -->
     <!-- start rating distribution -->
     <div class="sm:w-[80%] flex flex-col grow">
       @for (dist of [5, 4, 3, 2, 1]; track $index) {
@@ -67,6 +82,8 @@
         </div>
       }
     </div>
-    <!-- end rating distribution -->
+    <!-- end rating distribution-->
   </div>
+
+  <!-- end docRank -->
 </div>

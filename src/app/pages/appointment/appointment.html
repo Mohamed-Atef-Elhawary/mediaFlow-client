@@ -35,7 +35,7 @@
     </div>
   </div>
   <div>
-    <app-doc-rank [ranking2]="ranking()"></app-doc-rank>
+    <app-doc-rank [ranking]="ranking()" (onreview)="startReviewing($event)"></app-doc-rank>
   </div>
   <div>
     <app-appointment-booking [docId]="myDoctor()._id"></app-appointment-booking>
@@ -44,4 +44,18 @@
     [docId]="myDoctor()._id"
     [docSpeciality]="myDoctor().speciality"
   ></app-related-doctors>
+</div>
+<!-- injected review component -->
+<!-- <div class="fixed w-[100vw] h-[100vh] top-0 left-0 bg-red-200 z-60">
+ 
+</div> -->
+
+<div
+  [ngClass]="{ fixed: backDrop(), hidden: !backDrop() }"
+  (click)="isBackDropToCancel($event)"
+  class="w-[100vw] h-[100vh] top-0 left-0 py-[10px] px-[5px] bg-black/50 z-60 flex items-center justify-center"
+>
+  <div class="bg-white rounded-xl p-[40px]">
+    <ng-container #review></ng-container>
+  </div>
 </div>
