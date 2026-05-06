@@ -1,12 +1,21 @@
 <div class="flex flex-col gap-6">
   <!-- doc info -->
-  <div class="flex gap-2 items-center">
-    <div class="w-[60px] h-[60px] lg:w-[6vw] lg:h-[6vw] rounded-xl overflow-hidden">
-      <img class="w-full h-full object-cover" [src]="doctorData().image" />
+  <div class="flex justify-between">
+    <div class="flex gap-2 items-center">
+      <div class="w-[60px] h-[60px] lg:w-[6vw] lg:h-[6vw] rounded-xl overflow-hidden">
+        <img class="w-full h-full object-cover" [src]="doctorData().image" />
+      </div>
+      <div>
+        <h2 class="text-xl lg:text-[1.4vw]">{{ doctorData().name }}</h2>
+        <p class="text-sm lg:text-[1.2vw] text-secondary">Rate this doctor</p>
+      </div>
     </div>
     <div>
-      <h2 class="text-xl lg:text-[1.4vw]">{{ doctorData().name }}</h2>
-      <p class="text-sm lg:text-[1.2vw] text-secondary">Rate this doctor</p>
+      <fa-icon
+        (click)="endReviewing()"
+        class="text-xl lg:text-[1.4vw] text-primary hover:text-danger cursor-pointer"
+        [icon]="xIcon"
+      ></fa-icon>
     </div>
   </div>
   <!-- user info -->
@@ -51,7 +60,13 @@
     </div>
     <!-- submit -->
     <div class="bg-primary text-white w-fit rounded-xl">
-      <button class="py-1 px-4 cursor-pointer font-bold">submit</button>
+      <button
+        [disabled]="reviewForm.invalid"
+        [ngClass]="{ 'cursor-pointer': reviewForm.valid, 'cursor-not-allowed': reviewForm.invalid }"
+        class="py-1 px-4 cursor-pointer font-bold"
+      >
+        submit
+      </button>
     </div>
   </form>
 </div>

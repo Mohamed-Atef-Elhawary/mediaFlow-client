@@ -23,9 +23,18 @@ import { AppointmentBooking } from '../../components/appointment-booking/appoint
 import { DocRank } from '../../components/doc-rank/doc-rank';
 import { DoctorRank } from '../../interfaces/doctor-rank';
 import { RankingService } from '../../services/ranking-service';
+import { AllReviews } from '../../components/all-reviews/all-reviews';
 @Component({
   selector: 'app-appointment',
-  imports: [FontAwesomeModule, CurrencyPipe, RelatedDoctors, AppointmentBooking, DocRank, NgClass],
+  imports: [
+    FontAwesomeModule,
+    CurrencyPipe,
+    RelatedDoctors,
+    AppointmentBooking,
+    DocRank,
+    NgClass,
+    AllReviews,
+  ],
   templateUrl: './appointment.html',
   styleUrl: './appointment.css',
 })

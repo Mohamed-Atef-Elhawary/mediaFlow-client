@@ -17,6 +17,10 @@ export class App {
   constructor(
     private auth: AuthService,
     private router: Router,
-  ) {}
+  ) {
+    console.log(Date.now().toString());
+    console.log(new Date(Date.now()));
+    console.log(new Date().getTime());
+  }
   authView: Signal<AuthView> = computed(() => this.auth.authView());
 }

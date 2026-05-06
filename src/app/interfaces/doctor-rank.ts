@@ -18,3 +18,15 @@ export interface ReviewData {
   rank: number;
   comment?: string;
 }
+export interface Review {
+  _id: string;
+  userId: {
+    _id: string;
+    name: string;
+    image: string;
+  };
+  rank: number;
+  comment: string;
+  createdAt: string;
+  helpfulVotes: string[];
+}

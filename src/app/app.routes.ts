@@ -58,8 +58,7 @@ export const routes: Routes = [
     loadComponent: () => import('./components/doc-rank/doc-rank').then((c) => c.DocRank),
   },
   {
-    path: 'review',
-    loadComponent: () =>
-      import('./components/write-review/write-review').then((c) => c.WriteReview),
+    path: 'all',
+    loadComponent: () => import('./components/all-reviews/all-reviews').then((c) => c.AllReviews),
   },
 ];

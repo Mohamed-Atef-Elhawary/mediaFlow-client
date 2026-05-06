@@ -1,5 +1,5 @@
-<div class="py-6">
-  <div class="flex flex-col md:flex-row gap-6 mb-4 p-1">
+<div class="flex flex-col gap-6 py-6">
+  <div class="flex flex-col md:flex-row gap-6 p-1">
     <div class="w-full h-full md:w-[30%]">
       <img class="w-full h-full object-cover" [src]="myDoctor().image" alt="" />
     </div>
@@ -34,16 +34,23 @@
       </p>
     </div>
   </div>
-  <div>
+  <div class="">
     <app-doc-rank [ranking]="ranking()" (onreview)="startReviewing($event)"></app-doc-rank>
   </div>
-  <div>
+  <div class="">
     <app-appointment-booking [docId]="myDoctor()._id"></app-appointment-booking>
   </div>
-  <app-related-doctors
-    [docId]="myDoctor()._id"
-    [docSpeciality]="myDoctor().speciality"
-  ></app-related-doctors>
+  <div class="">
+    @if (myDoctor()._id) {
+      <!-- <app-all-reviews [docId]="myDoctor()._id"></app-all-reviews> -->
+    }
+  </div>
+  <div class="">
+    <app-related-doctors
+      [docId]="myDoctor()._id"
+      [docSpeciality]="myDoctor().speciality"
+    ></app-related-doctors>
+  </div>
 </div>
 <!-- injected review component -->
 <!-- <div class="fixed w-[100vw] h-[100vh] top-0 left-0 bg-red-200 z-60">

@@ -1,0 +1,57 @@
+<div>
+  <div class="flex flex-col gap-6">
+    @for (review of reviews(); track $index) {
+      <div class="flex flex-col gap-2">
+        <!-- user info -->
+        <div class="flex gap-2 items-center">
+          <img
+            class="w-[30px] h-[30px] lg:w-[4vw] lg:h-[4vw] rounded-full object-cover"
+            [src]="review.userId.image"
+            alt=""
+          />
+          <p class="lg:text-[1.2vw] text-secondary">{{ review.userId.name }}</p>
+        </div>
+        <!-- ranks && comments -->
+        <div>
+          <div class="flex gap-2 mb-1">
+            <div class="flex items-center">
+              @for (rank of [1, 2, 3, 4, 5]; track $index) {
+                <fa-icon
+                  [ngClass]="{
+                    'text-primary': rank <= review.rank,
+                    'text-gray-200': rank > review.rank,
+                  }"
+                  class="text-[5px] lg:text-[1vw]"
+                  [icon]="starIcon"
+                ></fa-icon>
+              }
+            </div>
+            <p class="text-sm lg:text-[1.1vw] text-gray-400">{{ review.createdAt | date }}</p>
+          </div>
+          <p class="text-sm lg:text-[1.1vw] text-gray-400">{{ review.comment }}</p>
+        </div>
+        <!-- helpfull vots -->
+        <div class="text-sm lg:text-[1vw] text-gray-400">
+          <p>
+            <span>{{ review.helpfulVotes.length }} people found this review helpful</span>
+          </p>
+          <div class="flex gap-3 items-center">
+            <p class="text-sm lg:text-[1vw] text-gray-400 mb-1">Did you find this helpful?</p>
+            <div class="flex gap-2">
+              <button
+                class="lg:text-[2vw] text-gray-500 border border-gray-300 rounded-lg px-2 hover:bg-gray-200"
+              >
+                Yes
+              </button>
+              <button
+                class="lg:text-[2vw] text-gray-500 border border-gray-300 rounded-lg px-2 hover:bg-gray-200"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
