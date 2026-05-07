@@ -48,6 +48,17 @@ export class RankingService {
         catchError((err): Observable<never> => throwError(() => new Error(err))),
       );
   }
+  helpfulReview(reviewId: string): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
+      `${environment.backendUrl}review/helpful-review`,
+      { reviewId },
+      {
+        headers: new HttpHeaders({
+          authorization: `Bearer ${this.authSerive.userData()?.token}`,
+        }),
+      },
+    );
+  }
   // private allReviews = (docId: string): Observable<ApiResponse> => {
   //   return this.http
   //     .post<ApiResponse>(

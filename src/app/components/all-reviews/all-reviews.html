@@ -32,19 +32,32 @@
         </div>
         <!-- helpfull vots -->
         <div class="text-sm lg:text-[1vw] text-gray-400">
-          <p>
+          @if (review.helpfulVotes.length) {
             <span>{{ review.helpfulVotes.length }} people found this review helpful</span>
-          </p>
+          }
+          <p></p>
           <div class="flex gap-3 items-center">
             <p class="text-sm lg:text-[1vw] text-gray-400 mb-1">Did you find this helpful?</p>
             <div class="flex gap-2">
               <button
-                class="lg:text-[2vw] text-gray-500 border border-gray-300 rounded-lg px-2 hover:bg-gray-200"
+                (click)="helpfulReview(review._id, review.helpfulVotes)"
+                [disabled]="isExists(review.helpfulVotes)"
+                [ngClass]="{
+                  'bg-gray-200 cursor-not-allowed': isExists(review.helpfulVotes),
+                  ' bg-transparent cursor-pointer': !isExists(review.helpfulVotes),
+                }"
+                class="lg:text-[1.2vw] text-gray-500 border border-gray-300 rounded-lg px-2"
               >
                 Yes
               </button>
               <button
-                class="lg:text-[2vw] text-gray-500 border border-gray-300 rounded-lg px-2 hover:bg-gray-200"
+                (click)="helpfulReview(review._id, review.helpfulVotes)"
+                [disabled]="!isExists(review.helpfulVotes)"
+                [ngClass]="{
+                  ' cursor-not-allowed': !isExists(review.helpfulVotes),
+                  '  cursor-pointer': isExists(review.helpfulVotes),
+                }"
+                class="lg:text-[1.2vw] text-gray-500 border border-gray-300 rounded-lg px-2"
               >
                 No
               </button>
