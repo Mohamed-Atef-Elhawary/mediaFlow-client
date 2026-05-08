@@ -135,8 +135,8 @@
       </section>
       <div>
         <button
-          [disabled]="userForm.invalid"
-          [ngClass]="userForm.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+          [disabled]="userForm.invalid || isNotChanged()"
+          [ngClass]="userForm.invalid || isNotChanged() ? 'cursor-not-allowed' : 'cursor-pointer'"
           class="w-full md:w-[60%] bg-red-400 hover:bg-danger text-white font-semibold text-[3vw] px-1 py-2 lg:text-[1.5vw] md:px-3 md:py-4 rounded-lg shrink-0"
         >
           Save

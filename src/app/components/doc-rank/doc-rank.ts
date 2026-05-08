@@ -1,12 +1,9 @@
 import {
   Component,
-  computed,
   OnInit,
   signal,
   input,
   OnChanges,
-  SimpleChange,
-  SimpleChanges,
   WritableSignal,
   ChangeDetectorRef,
   Output,
@@ -18,10 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { ReviewDirective } from '../../directives/review';
-
-import { RouterLink } from '@angular/router';
-import { last } from 'rxjs';
-import { CommonModule, NgClass, NgStyle } from '@angular/common';
+import { CommonModule, NgStyle } from '@angular/common';
 import { RankingService } from '../../services/ranking-service';
 
 @Component({
