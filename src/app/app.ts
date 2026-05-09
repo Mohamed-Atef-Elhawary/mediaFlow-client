@@ -1,9 +1,10 @@
-import { Component, computed, Signal, signal } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, computed, effect, OnInit, Signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
 import { Footer } from './components/footer/footer';
 import { AuthService } from './services/auth-service';
 import { AuthView } from './types/authType';
+import { DoctorService } from './services/doctor-service';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +13,10 @@ import { AuthView } from './types/authType';
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('mediaFlow');
-
   constructor(
     private auth: AuthService,
-    private router: Router,
-  ) {
-    console.log(Date.now().toString());
-    console.log(new Date(Date.now()));
-    console.log(new Date().getTime());
-  }
+    private docService: DoctorService,
+  ) {}
+
   authView: Signal<AuthView> = computed(() => this.auth.authView());
 }

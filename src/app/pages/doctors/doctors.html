@@ -4,7 +4,7 @@
 <div class="flex gap-2 flex-col md:flex-row">
   <app-speciality-list
     (selected)="getSpeciality($event)"
-    [selectedSpecialityFromParent]="speciality()"
+    [selectedSpecialityFromHome]="speciality()"
   ></app-speciality-list>
   <app-all-doctors [speciality]="speciality()"></app-all-doctors>
 </div>

@@ -1,11 +1,9 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AuthService } from './auth-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../interfaces/api-response';
-import { ApiUserInfo } from '../interfaces/api-user-info';
-import { LoginResponse } from '../interfaces/login-response';
 import { AppointmentRequest } from '../interfaces/appointment-request';
 
 @Injectable({

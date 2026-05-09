@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth-guard';
 import { redirectGuard } from './guards/redirect-guard';
 import { profileSettingsResolver } from './resolvers/profile-settings-resolver';
+import { doctorsResolver } from './resolvers/doctors-resolver';
 export const routes: Routes = [
   { path: '', redirectTo: 'outer', pathMatch: 'full' },
   {
@@ -19,6 +20,7 @@ export const routes: Routes = [
   {
     path: 'doctors',
     loadComponent: () => import('./pages/doctors/doctors').then((c) => c.Doctors),
+    // resolve: { docs: doctorsResolver },
   },
   { path: 'about', loadComponent: () => import('./pages/about/about').then((c) => c.About) },
   {

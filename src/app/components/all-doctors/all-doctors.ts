@@ -1,18 +1,10 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  signal,
-  SimpleChange,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, computed, Input, Signal } from '@angular/core';
 import { DoctorData } from '../../interfaces/doctor-data';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { DoctorService } from '../../services/doctor-service';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FilterBySpecialtyPipe } from '../../pipes/filter-by-specialty-pipe';
 
 @Component({
@@ -21,23 +13,28 @@ import { FilterBySpecialtyPipe } from '../../pipes/filter-by-specialty-pipe';
   templateUrl: './all-doctors.html',
   styleUrl: './all-doctors.css',
 })
-export class AllDoctors implements OnInit, OnChanges {
-  allDoctors = signal<DoctorData[]>([]);
+export class AllDoctors {
   @Input() speciality!: string | null;
   availableIcon = faCircleCheck;
   notAvailableIcon = faCircleXmark;
-  constructor(private docotr: DoctorService) {}
-
-  ngOnInit(): void {
-    console.log('jjjjjjjjjjjjjjjjjj');
-    this.docotr.doctors().subscribe({
-      next: (response) => {
-        this.allDoctors.update((data) => response.data);
-      },
-    });
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log('changes', changes);
-    console.log(' @Input() speciality!: string | null;', this.speciality);
-  }
+  constructor(
+    private docotrService: DoctorService,
+    private route: ActivatedRoute,
+  ) {}
+  allDoctors: Signal<DoctorData[]> = computed(() => {
+    console.log(this.docotrService.allDocs());
+    console.log(this.docotrService.allDocs().data);
+    return this.docotrService.allDocs().data || [];
+  });
 }
+
+// allDoctors: WritableSignal<DoctorData[]> = signal([]);
+// constructor(
+//   private docotrService: DoctorService,
+//   private route: ActivatedRoute,
+// ) {
+//   // this.allDoctors.set(this.route.snapshot.data['docs'].data);
+//   // this.route.data.subscribe((res) => {
+//   //   this.allDoctors.set(res['docs'].data);
+//   // });
+// }

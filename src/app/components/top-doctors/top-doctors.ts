@@ -1,10 +1,10 @@
-import { Component, signal, OnInit, computed } from '@angular/core';
-import { DoctorData } from '../../interfaces/doctor-data';
+import { Component, computed, Signal } from '@angular/core';
 import { DoctorService } from '../../services/doctor-service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
+import { DoctorData } from '../../interfaces/doctor-data';
 
 @Component({
   selector: 'app-top-doctors',
@@ -12,19 +12,14 @@ import { RouterLink } from '@angular/router';
   templateUrl: './top-doctors.html',
   styleUrl: './top-doctors.css',
 })
-export class TopDoctors implements OnInit {
+export class TopDoctors {
   availableIcon = faCircleCheck;
   notAvailableIcon = faCircleXmark;
-  constructor(private docotr: DoctorService) {}
+  constructor(private docotrService: DoctorService) {}
 
-  allDoctors = computed(() => {
-    return this.docotr.allDoctors();
+  allDoctors: Signal<any[]> = computed(() => {
+    const data = this.docotrService.allDocs().data;
+    return data || [];
   });
-  ngOnInit(): void {
-    this.docotr.doctors().subscribe({
-      next: (response) => {
-        this.docotr.allDoctors.set(response.data);
-      },
-    });
-  }
+  topDoctors: Signal<DoctorData[]> = computed(() => this.allDoctors().slice(0, 8));
 }

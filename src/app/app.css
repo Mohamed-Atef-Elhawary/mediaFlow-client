@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 100vh;
+  padding: 0 16px;
+}
+@media (min-width: 640px) {
+  :host {
+    padding: 0 5%;
+  }
+}

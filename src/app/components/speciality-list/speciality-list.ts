@@ -25,7 +25,7 @@ import { CommonModule } from '@angular/common';
 export class SpecialityList implements OnChanges {
   selectedSpeciality = signal<string>('');
   @Output() selected!: EventEmitter<string>;
-  @Input() selectedSpecialityFromParent!: string | null;
+  @Input() selectedSpecialityFromHome!: string | null;
   specialityList: string[] = [
     'Cardiology',
     'Orthopedics',
@@ -38,15 +38,12 @@ export class SpecialityList implements OnChanges {
     this.selected = new EventEmitter<string>();
   }
   ngOnChanges(): void {
-    if (this.selectedSpecialityFromParent) {
-      console.log('this.selectedSpecialityFromParent', this.selectedSpecialityFromParent);
-      this.sendSpectiality(this.selectedSpecialityFromParent);
+    if (this.selectedSpecialityFromHome) {
+      this.sendSpectiality(this.selectedSpecialityFromHome);
     }
   }
   sendSpectiality(speciality: string) {
     this.selectedSpeciality.set(speciality);
     this.selected.emit(speciality);
-    // console.log('speciality', speciality);
-    // console.log('this.selectedSpeciality', this.selectedSpeciality());
   }
 }

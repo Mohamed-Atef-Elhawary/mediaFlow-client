@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class Doctors implements OnInit {
   speciality = signal<string | null>(null);
+
   constructor(private route: ActivatedRoute) {}
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
@@ -21,6 +22,5 @@ export class Doctors implements OnInit {
   }
   getSpeciality(event: string) {
     this.speciality.set(event);
-    // console.log('from doctor', event);
   }
 }
