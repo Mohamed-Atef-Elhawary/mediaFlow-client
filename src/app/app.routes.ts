@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth-guard';
 import { redirectGuard } from './guards/redirect-guard';
 import { profileSettingsResolver } from './resolvers/profile-settings-resolver';
-import { doctorsResolver } from './resolvers/doctors-resolver';
+// import { doctorsResolver } from './resolvers/doctors-resolver';
 export const routes: Routes = [
   { path: '', redirectTo: 'outer', pathMatch: 'full' },
   {
@@ -50,7 +50,7 @@ export const routes: Routes = [
   },
   {
     path: 'register/:state',
-    loadComponent: () => import('./components/register/register').then((c) => c.Register),
+    loadComponent: () => import('./pages/register/register').then((c) => c.Register),
   },
 
   ///////////////////////////////////////////////////////////

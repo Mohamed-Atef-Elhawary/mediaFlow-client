@@ -27,25 +27,8 @@ export class Profile implements OnInit {
   ngOnInit() {
     // this.route.snapshot.data
     const resolveObj = this.route.snapshot.data['profileResolver'];
-
     if (resolveObj.success == true) {
-      console.log(resolveObj.data);
       this.auth.userDataSeter(resolveObj.data);
     }
-
-    // this.userService.profile().subscribe({
-    //   next: (res) => {
-    //     this.auth.userDataSetser(res.data);
-    //     // console.log('userInfo', this.userInfo());
-    //   },
-    //   error: (err) => {
-    //     this.toastr.error(
-    //       'Please check your connection or try again later.',
-    //       'Error',
-    //       toastConfig.errorConfig,
-    //     );
-    //     console.log(err);
-    //   },
-    // });
   }
 }

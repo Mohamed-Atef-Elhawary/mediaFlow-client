@@ -44,6 +44,7 @@ export class WriteReview implements OnInit {
 
   ngOnInit() {
     this.makeForm();
+    this.reviewForm.patchValue({ rank: this.rankingService.docRank() });
   }
   makeForm() {
     this.reviewForm = this.fb.group({
@@ -57,24 +58,6 @@ export class WriteReview implements OnInit {
     this.reviewForm.patchValue({ rank: this.rankingService.docRank() });
   }
   submit() {
-    // const rank = this.fb.control(this.rankingService.docRank(), [
-    //   // Validators.required,
-    //   Validators.min(1),
-    //   Validators.max(5),
-    // ]);
-    // console.log('rank', rank);
-    // this.reviewForm.addControl(
-    //   'rank',
-    //   this.fb.control(this.rankingService.docRank(), [
-    //     Validators.required,
-    //     Validators.min(1),
-    //     Validators.max(5),
-    //   ]),
-    // );
-    // this.reviewForm.addControl('rank', rank);
-
-    // console.log(this.reviewForm.value);
-    // console.log('this.reviewForm.valid', this.reviewForm.valid);
     if (this.reviewForm.valid) {
       this.rankingService.addReview(this.reviewForm.value).subscribe({
         next: (res) => {
@@ -87,7 +70,6 @@ export class WriteReview implements OnInit {
       });
       this.endReviewing();
     }
-    // console.log('rankingService.docRank', this.rankingService.docRank());
   }
 
   endReviewing(): void {

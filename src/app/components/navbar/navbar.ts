@@ -90,7 +90,7 @@ export class Navbar implements AfterViewInit {
     if (this.authView() === 'authorized') {
       this.router.navigate(['/home']);
     } else {
-      this.authService.authView.set('outer');
+      // this.authService.authView.set('outer');
       this.router.navigate(['outer']);
     }
   }

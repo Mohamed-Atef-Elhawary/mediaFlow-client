@@ -16,20 +16,20 @@ export class RelatedDoctors {
   availableIcon = faCircleCheck;
   notAvailableIcon = faCircleXmark;
   relatedDoctors: DoctorData[] = [];
-  constructor(private docotr: DoctorService) {}
+  constructor(private docotrService: DoctorService) {}
   docId = input.required<string>();
   docSpeciality = input.required<string>();
 
   reletedDocs = computed(() => {
-    return this.docotr
-      .allDoctors()
+    return this.docotrService
+      .allDocs()
       .filter((doc) => doc._id !== this.docId() && doc.speciality === this.docSpeciality());
   });
   ngOnInit(): void {
-    this.docotr.doctors().subscribe({
-      next: (response) => {
-        this.docotr.allDoctors.set(response.data);
-      },
-    });
+    // this.docotr.doctors().subscribe({
+    //   next: (response) => {
+    //     this.docotr.allDoctors.set(response.data);
+    //   },
+    // });
   }
 }

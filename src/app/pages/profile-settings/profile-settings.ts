@@ -27,6 +27,7 @@ export class ProfileSettings {
     private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
   ) {}
+
   userInfo = computed(() => {
     return this.auth.userInfo();
   });
@@ -40,6 +41,7 @@ export class ProfileSettings {
     }
     this.isNotChanged();
   }
+
   modifyDateOfBirth() {
     let dateOfBirth = this.userInfo()?.dateOfBirth;
     if (dateOfBirth) {
@@ -48,6 +50,7 @@ export class ProfileSettings {
       this.cdr.detectChanges();
     }
   }
+
   getDateOfBirth(dob: string): string {
     let userBirth = new Date(dob);
 
@@ -61,6 +64,7 @@ export class ProfileSettings {
 
     return `${yearOfBirth}-${monthOfBirth}-${dayOfBirth}`;
   }
+
   createUserForm() {
     this.userForm = this.fb.group({
       dateOfBirth: [this.dob, [Validators.required]],
@@ -83,6 +87,7 @@ export class ProfileSettings {
       }),
     });
   }
+
   fileUploaded(event: any) {
     let file = event.target.files[0];
     if (file) {

@@ -17,9 +17,11 @@ export class TopDoctors {
   notAvailableIcon = faCircleXmark;
   constructor(private docotrService: DoctorService) {}
 
-  allDoctors: Signal<any[]> = computed(() => {
-    const data = this.docotrService.allDocs().data;
-    return data || [];
+  topDoctors: Signal<DoctorData[]> = computed(() => {
+    const data = this.docotrService.allDocs();
+    if (data) {
+      return data.slice(0, 8);
+    }
+    return [];
   });
-  topDoctors: Signal<DoctorData[]> = computed(() => this.allDoctors().slice(0, 8));
 }

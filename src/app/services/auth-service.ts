@@ -1,4 +1,4 @@
-import { effect, Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { AuthView } from '../types/authType';
 import { UserRegister } from '../interfaces/user-register';
 import { UserLogin } from '../interfaces/user-login';
@@ -15,66 +15,65 @@ import { ApiUserInfo } from '../interfaces/api-user-info';
 })
 export class AuthService {
   userInfo = signal<ApiUserInfo | null>(null);
+  userData: WritableSignal<LoginResponse | null> = signal(null);
+  authView = signal<AuthView>('outer');
   showUserMenu = signal<boolean>(false);
-  userData: WritableSignal<LoginResponse | null> = signal(this.getUserData());
-
-  authView = signal<AuthView>(this.userData()?.token ? 'authorized' : 'outer');
-
   constructor(
     private http: HttpClient,
     private router: Router,
   ) {
-    let jsonObj = localStorage.getItem('userInfo');
-    if (jsonObj) {
-      this.userInfo.set(JSON.parse(jsonObj));
+    this.loadUserSession();
+  }
+
+  loadUserSession() {
+    const jsonUserData = localStorage.getItem('userData');
+    const jsonUserInfo = localStorage.getItem('userInfo');
+    if (jsonUserData) {
+      this.userData.set(JSON.parse(jsonUserData));
+      if (this.userData()?.token) {
+        this.authView.set('authorized');
+      }
+    }
+    if (jsonUserInfo) {
+      this.userInfo.set(JSON.parse(jsonUserInfo));
     }
   }
 
-  getUserData(): LoginResponse | null {
-    let jsonUserData = localStorage.getItem('userData');
-    if (jsonUserData) {
-      return JSON.parse(jsonUserData);
-    }
-    return null;
-  }
   updateAuthState(data: LoginResponse) {
     if (data) {
-      let jsonUserData = JSON.stringify(data);
+      const jsonUserData = JSON.stringify(data);
       localStorage.setItem('userData', jsonUserData);
       this.userData.set(data);
-      this.authView.set('authorized');
-      this.router.navigate(['/home']);
-    } else {
-      this.signOut();
     }
   }
 
   userDataSeter(data: ApiUserInfo): void {
-    let newUserData: LoginResponse = this.userData() || ({} as LoginResponse);
-    const { image, name } = data;
-    if (image) {
-      newUserData.image = image;
-    }
-    newUserData.name = name;
-    this.userData.update((v) => ({ ...v, ...newUserData }));
-    localStorage.setItem('userData', JSON.stringify(this.userData()));
+    this.userData.update((value) => {
+      if (value) {
+        const newValue = { ...value };
+        if (data.image) {
+          newValue.image = data.image;
+        }
+        newValue.name = data.name;
+        return newValue;
+      }
+      return value;
+    });
 
     this.userInfo.set(data);
+    localStorage.setItem('userData', JSON.stringify(this.userData()));
     localStorage.setItem('userInfo', JSON.stringify(data));
   }
-  // userDataRemover() {
-  //   localStorage.removeItem('userInfo');
-  //   this.userInfo.set(null);
-  // }
+
   signOut() {
     localStorage.removeItem('userData');
     this.userData.set(null);
     localStorage.removeItem('userInfo');
     this.userInfo.set(null);
-
     this.authView.set('outer');
     this.router.navigate(['/outer']);
   }
+
   register(data: UserRegister): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${environment.backendUrl}user/register`, data);
   }

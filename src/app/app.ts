@@ -1,10 +1,9 @@
-import { Component, computed, effect, OnInit, Signal } from '@angular/core';
+import { Component, computed, Signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
 import { Footer } from './components/footer/footer';
 import { AuthService } from './services/auth-service';
 import { AuthView } from './types/authType';
-import { DoctorService } from './services/doctor-service';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +12,7 @@ import { DoctorService } from './services/doctor-service';
   styleUrl: './app.css',
 })
 export class App {
-  constructor(
-    private auth: AuthService,
-    private docService: DoctorService,
-  ) {}
+  constructor(private auth: AuthService) {}
 
   authView: Signal<AuthView> = computed(() => this.auth.authView());
 }
