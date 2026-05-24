@@ -26,7 +26,7 @@ export class AllReviews implements OnInit {
     this.ranckingService.allReviews(this.docId()).subscribe({
       next: (res) => {
         this.reviews.set(res);
-        console.log(this.reviews());
+        console.log('this.reviews()', this.reviews());
       },
 
       error: (err) => {

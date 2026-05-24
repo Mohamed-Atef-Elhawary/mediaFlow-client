@@ -21,15 +21,13 @@ export class RelatedDoctors {
   docSpeciality = input.required<string>();
 
   reletedDocs = computed(() => {
-    return this.docotrService
-      .allDocs()
-      .filter((doc) => doc._id !== this.docId() && doc.speciality === this.docSpeciality());
+    const data = this.docotrService.allDocs()?.data;
+    if (data) {
+      return data.filter(
+        (doc: DoctorData) => doc._id !== this.docId() && doc.speciality === this.docSpeciality(),
+      );
+    }
+    return [];
   });
-  ngOnInit(): void {
-    // this.docotr.doctors().subscribe({
-    //   next: (response) => {
-    //     this.docotr.allDoctors.set(response.data);
-    //   },
-    // });
-  }
+  ngOnInit(): void {}
 }

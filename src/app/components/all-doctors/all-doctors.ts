@@ -19,6 +19,6 @@ export class AllDoctors {
   notAvailableIcon = faCircleXmark;
   constructor(private docotrService: DoctorService) {}
   allDoctors: Signal<DoctorData[]> = computed(() => {
-    return this.docotrService.allDocs();
+    return this.docotrService.allDocs()?.data;
   });
 }

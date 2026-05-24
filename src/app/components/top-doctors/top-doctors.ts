@@ -15,12 +15,14 @@ import { DoctorData } from '../../interfaces/doctor-data';
 export class TopDoctors {
   availableIcon = faCircleCheck;
   notAvailableIcon = faCircleXmark;
-  constructor(private docotrService: DoctorService) {}
+  constructor(private docotrService: DoctorService) {
+    console.log('top');
+  }
 
   topDoctors: Signal<DoctorData[]> = computed(() => {
-    const data = this.docotrService.allDocs();
-    if (data) {
-      return data.slice(0, 8);
+    const response = this.docotrService.allDocs();
+    if (response?.success && response?.data) {
+      return response.data.slice(0, 8);
     }
     return [];
   });

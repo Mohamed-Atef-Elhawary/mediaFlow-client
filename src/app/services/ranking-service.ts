@@ -5,7 +5,6 @@ import { environment } from '../../environments/environment';
 import { Review, ReviewData } from '../interfaces/doctor-rank';
 import { AuthService } from './auth-service';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +17,7 @@ export class RankingService {
     private http: HttpClient,
     private authSerive: AuthService,
   ) {}
+
   addReview(reviewData: ReviewData): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${environment.backendUrl}review/add-review`, reviewData, {
       headers: new HttpHeaders({
@@ -26,7 +26,7 @@ export class RankingService {
     });
   }
 
-  allReviews(docId: string): Observable<any> {
+  allReviews(docId: string): Observable<Review[]> {
     return this.http
       .post<ApiResponse>(
         `${environment.backendUrl}review/all-reviews`,
@@ -38,16 +38,15 @@ export class RankingService {
         },
       )
       .pipe(
-        map((res): Observable<Review[] | never> => {
-          if (res.success) {
-            return res.data;
-          } else {
-            return throwError(() => Error(res.message));
+        map((response) => {
+          if (response.success) {
+            return response.data;
           }
+          return [] as Review[];
         }),
-        catchError((err): Observable<never> => throwError(() => new Error(err))),
       );
   }
+
   helpfulReview(reviewId: string): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(
       `${environment.backendUrl}review/helpful-review`,
@@ -59,30 +58,4 @@ export class RankingService {
       },
     );
   }
-  // private allReviews = (docId: string): Observable<ApiResponse> => {
-  //   return this.http
-  //     .post<ApiResponse>(
-  //       `${environment.backendUrl}review/all-reviews`,
-  //       { docId },
-  //       {
-  //         headers: new HttpHeaders({
-  //           authorization: `Bearer ${this.authSerive.userData()?.token}`,
-  //         }),
-  //       },
-  //     )
-  //     .pipe(
-  //       map((res) => {
-  //         if (res.success) {
-  //           return res.data;
-  //         } else {
-  //           return throwError(() => Error(res.message));
-  //         }
-  //       }),
-  //       catchError((err) => throwError(() => new Error(err))),
-  //     );
-  // };
-
-  // reviews = toSignal(this.allReviews(this.docIdSignal()));
-
-  // toSignal(this.allReviews(this.docIdSignal()), { initialValue: [] });
 }
