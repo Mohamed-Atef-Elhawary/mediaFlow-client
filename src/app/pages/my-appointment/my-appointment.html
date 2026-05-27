@@ -41,16 +41,19 @@
           <p class="font-medium md:text-[1.4vw] text-gray-600">
             Appointment Time: <span class="text-secondary">{{ appointment.appointmentTime }}</span>
           </p>
-          <button
-            [ngClass]="{
-              'cursor-pointer': !appointment.cancelled,
-              'cursor-not-allowed': appointment.cancelled,
-            }"
-            (click)="cancelAppointment(appointment._id)"
-            class="border-2 border-secondary sm:w-[50%] md:w-full py-1 px-3 md:text-[1.4vw] font-medium text-dark hover:text-white hover:bg-primary hover:border-0"
-          >
-            {{ appointment.cancelled ? 'cancelled?' : 'Cancel Appointment' }}
-          </button>
+          @if (!appointment.isCompleted) {
+            <button
+              [ngClass]="{
+                'cursor-pointer': !appointment.cancelled,
+              }"
+              (click)="cancelAppointment(appointment._id)"
+              class="border-2 border-secondary sm:w-[50%] md:w-full py-1 px-3 md:text-[1.4vw] font-medium text-dark hover:text-white hover:bg-primary hover:border-0"
+            >
+              Cancel
+            </button>
+          } @else {
+            <p class="text-sky-200 font-medium md:text-[1.4vw]">completed</p>
+          }
         </div>
       </div>
     }

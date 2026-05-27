@@ -32,7 +32,12 @@
   <div>
     <div class="flex items-center gap-2 text-xl md:text-[1.4vw]">
       <h2>Ratings and reviews</h2>
-      <fa-icon class="cursor-pointer" [icon]="arrow"></fa-icon>
+      <fa-icon
+        [routerLink]="['/appointment/', ranking()._id]"
+        fragment="doc-reviews"
+        class="cursor-pointer"
+        [icon]="arrow"
+      ></fa-icon>
     </div>
   </div>
   <!-- end Ratings and reviews  -->

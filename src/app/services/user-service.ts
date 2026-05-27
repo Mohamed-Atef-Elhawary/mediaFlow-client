@@ -16,7 +16,6 @@ export class UserService {
   ) {}
 
   profile(): Observable<ApiResponse> {
-    // console.log(this.auth.userToken());
     return this.http.get<ApiResponse>(`${environment.backendUrl}user/profile`, {
       headers: new HttpHeaders({
         authorization: `Bearer ${this.auth.userData()?.token}`,
@@ -25,7 +24,6 @@ export class UserService {
   }
 
   updateProfile(data: FormData): Observable<ApiResponse> {
-    console.log('ddddddddddddddddddddddddd');
     console.log(Array.from(data));
     return this.http.post<ApiResponse>(`${environment.backendUrl}user/update`, data, {
       headers: new HttpHeaders({

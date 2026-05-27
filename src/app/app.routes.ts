@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth-guard';
 import { redirectGuard } from './guards/redirect-guard';
 import { profileSettingsResolver } from './resolvers/profile-settings-resolver';
+import { myAppointmentsResolver } from './resolvers/my-appointments-resolver';
 // import { doctorsResolver } from './resolvers/doctors-resolver';
 export const routes: Routes = [
   { path: '', redirectTo: 'outer', pathMatch: 'full' },
@@ -47,6 +48,7 @@ export const routes: Routes = [
     path: 'myappointment',
     loadComponent: () =>
       import('./pages/my-appointment/my-appointment').then((c) => c.MyAppointment),
+    resolve: { myAppointmentRes: myAppointmentsResolver },
   },
   {
     path: 'register/:state',
@@ -54,13 +56,16 @@ export const routes: Routes = [
   },
 
   ///////////////////////////////////////////////////////////
-
   {
-    path: 'rank',
-    loadComponent: () => import('./components/doc-rank/doc-rank').then((c) => c.DocRank),
+    path: '**',
+    loadComponent: () => import('./pages/not-found/not-found').then((c) => c.NotFound),
   },
-  {
-    path: 'all',
-    loadComponent: () => import('./components/all-reviews/all-reviews').then((c) => c.AllReviews),
-  },
+  // {
+  //   path: 'rank',
+  //   loadComponent: () => import('./components/doc-rank/doc-rank').then((c) => c.DocRank),
+  // },
+  // {
+  //   path: 'all',
+  //   loadComponent: () => import('./components/all-reviews/all-reviews').then((c) => c.AllReviews),
+  // },
 ];

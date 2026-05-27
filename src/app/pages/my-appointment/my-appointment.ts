@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { toastConfig } from '../../config/toastConfig';
 import { DatePipe, NgClass } from '@angular/common';
 import { PhotoService } from '../../services/photo-service';
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'app-my-appointment',
@@ -21,22 +22,12 @@ export class MyAppointment implements OnInit {
     private cdr: ChangeDetectorRef,
     private toastr: ToastrService,
     private photo: PhotoService,
+    private route: ActivatedRoute,
   ) {
     this.emptyImage = this.photo.static.empty;
   }
   ngOnInit(): void {
-    this.userService.appointmentsList().subscribe({
-      next: (res) => {
-        if (res.data) {
-          this.myAppointments.set(res.data.reverse());
-          console.log(this.myAppointments());
-        }
-      },
-      error: (err) => {
-        this.toastr.error(err.message, 'Error', toastConfig.errorConfig);
-        console.log(err);
-      },
-    });
+    this.myAppointments.set(this.route.snapshot.data['myAppointmentRes'].data);
   }
   getAppointmentDate(date: string): Date {
     return new Date(Number(date));

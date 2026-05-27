@@ -119,6 +119,8 @@ export class Register implements OnInit {
         if (res.success) {
           // conso;
           this.toastr.success(res.message, 'MediaFlow', toastConfig.successConfig);
+          this.authService.authView.set('authorized');
+          this.router.navigate(['/home']);
           this.authService.updateAuthState(res.data);
         } else {
           this.toastr.error(res.message, 'MediaFlow', toastConfig.errorConfig);
@@ -138,8 +140,9 @@ export class Register implements OnInit {
         if (res.success) {
           // conso;
           this.toastr.success(res.message, 'MediaFlow', toastConfig.successConfig);
-          this.authService.updateAuthState(res.data);
+          this.authService.authView.set('authorized');
           this.router.navigate(['/home']);
+          this.authService.updateAuthState(res.data);
         } else {
           this.toastr.error(res.message, 'MediaFlow', toastConfig.errorConfig);
         }

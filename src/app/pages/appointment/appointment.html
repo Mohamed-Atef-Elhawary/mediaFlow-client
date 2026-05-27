@@ -40,7 +40,7 @@
   <div class="">
     <app-appointment-booking [docId]="myDoctor()._id"></app-appointment-booking>
   </div>
-  <div class="">
+  <div id="doc-reviews" class="">
     @if (myDoctor()._id) {
       <app-all-reviews [docId]="myDoctor()._id"></app-all-reviews>
     }
@@ -53,6 +53,7 @@
   </div>
 </div>
 <!-- injected review component -->
+
 <!-- <div class="fixed w-[100vw] h-[100vh] top-0 left-0 bg-red-200 z-60">
  
 </div> -->

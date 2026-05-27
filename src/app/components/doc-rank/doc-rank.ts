@@ -17,10 +17,11 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { ReviewDirective } from '../../directives/review';
 import { CommonModule, NgStyle } from '@angular/common';
 import { RankingService } from '../../services/ranking-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-doc-rank',
-  imports: [FontAwesomeModule, ReviewDirective, NgStyle, CommonModule],
+  imports: [FontAwesomeModule, ReviewDirective, NgStyle, CommonModule, RouterLink],
   templateUrl: './doc-rank.html',
   styleUrl: './doc-rank.css',
 })

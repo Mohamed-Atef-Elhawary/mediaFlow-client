@@ -15,6 +15,7 @@ export class PhotoService {
     about: 'aboutImg.avif',
     contact: 'contact.png',
     empty: 'empty.png',
+    notFound: 'notFound.png',
   };
   staticSpecialityIcon = {
     heart: 'heartHealth.png',

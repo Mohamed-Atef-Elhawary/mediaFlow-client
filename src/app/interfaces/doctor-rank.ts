@@ -1,5 +1,6 @@
 //from backend
 export interface DoctorRank {
+  _id?: string;
   rank: number;
   totalReviewers: number;
   ratingDistribution: {

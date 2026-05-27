@@ -33,10 +33,10 @@ export class ProfileSettings {
   });
 
   ngOnInit() {
-    const resolveObj = this.route.snapshot;
-    const infoObj = resolveObj.data['profileResolver'];
-    if (infoObj.success) {
-      this.auth.userDataSeter(infoObj.data);
+    const response = this.route.snapshot.data['profileResolver'];
+
+    if (response.success) {
+      this.auth.userDataSeter(response.data);
       this.modifyDateOfBirth();
     }
     this.isNotChanged();
@@ -106,33 +106,6 @@ export class ProfileSettings {
     }
   }
 
-  submit() {
-    const formData = new FormData();
-    formData.append('name', this.userForm.get('name')?.value);
-    formData.append('email', this.userForm.get('email')?.value);
-    formData.append('gender', this.userForm.get('gender')?.value);
-    formData.append('phone', this.userForm.get('phone')?.value);
-    formData.append('address', JSON.stringify(this.userForm.get('address')?.value));
-
-    if (this.userForm.get('image')) {
-      formData.append('image', this.userForm.get('image')?.value);
-    }
-    this.userService.updateProfile(formData).subscribe({
-      next: (res) => {
-        if (res.success) {
-          this.auth.userDataSeter(res.data);
-        }
-      },
-      error: (err) => {
-        this.toastr.error(
-          'Please check your connection or try again later.',
-          'Error',
-          toastConfig.errorConfig,
-        );
-        console.log('errrrrrrrrrrrr', err);
-      },
-    });
-  }
   isNotChanged(): boolean {
     let { address, email, gender, name, phone } = this.userInfo() as ApiUserInfo;
 
@@ -153,5 +126,40 @@ export class ProfileSettings {
       phone === newPhone &&
       newImage === undefined
     );
+  }
+
+  submit() {
+    const userFormData = this.formDataFiller();
+
+    this.userService.updateProfile(userFormData).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.auth.userDataSeter(res.data);
+        }
+      },
+      error: (err) => {
+        this.toastr.error(
+          'Please check your connection or try again later.',
+          'Error',
+          toastConfig.errorConfig,
+        );
+        console.log('errrrrrrrrrrrr', err);
+      },
+    });
+  }
+
+  formDataFiller(): FormData {
+    const userFormData = new FormData();
+    userFormData.append('name', this.userForm.get('name')?.value);
+    userFormData.append('email', this.userForm.get('email')?.value);
+    userFormData.append('gender', this.userForm.get('gender')?.value);
+    userFormData.append('phone', this.userForm.get('phone')?.value);
+    userFormData.append('address', JSON.stringify(this.userForm.get('address')?.value));
+
+    if (this.userForm.get('image')) {
+      userFormData.append('image', this.userForm.get('image')?.value);
+    }
+
+    return userFormData;
   }
 }

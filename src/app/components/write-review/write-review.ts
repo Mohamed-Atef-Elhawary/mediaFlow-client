@@ -4,6 +4,7 @@ import {
   computed,
   input,
   OnInit,
+  output,
   signal,
   Signal,
   WritableSignal,
@@ -41,6 +42,7 @@ export class WriteReview implements OnInit {
   ) {}
   userData: Signal<LoginResponse | null> = computed(() => this.authService.userData());
   doctorData = input.required<{ name: string; _id: string; image: string }>();
+  newDocRank = output<{ newRank: number; totalReviewers: number }>();
 
   ngOnInit() {
     this.makeForm();
@@ -61,7 +63,14 @@ export class WriteReview implements OnInit {
     if (this.reviewForm.valid) {
       this.rankingService.addReview(this.reviewForm.value).subscribe({
         next: (res) => {
-          console.log(res);
+          if (res.success) {
+            this.toastr.success(res.message, 'success', toastConfig.successConfig);
+            this.newDocRank.emit({
+              newRank: res.data.newRank,
+              totalReviewers: res.data.totalReviewers,
+            });
+          }
+          console.log('res from write-review ', res);
         },
         error: (err) => {
           console.log(err);

@@ -47,6 +47,7 @@ export class Appointment implements OnInit {
   myDoctor = signal<DoctorData>({} as DoctorData);
   ranking = computed<DoctorRank>(() => {
     return {
+      _id: this.myDoctor()._id,
       rank: this.myDoctor().rank,
       totalReviewers: this.myDoctor().totalReviewers,
       ratingDistribution: this.myDoctor().ratingDistribution,
@@ -96,6 +97,7 @@ export class Appointment implements OnInit {
     this.review.clear();
     const componentRef = this.review.createComponent(myComp);
     // console.log('componentRef', componentRef);
+
     if (this.myDoctor()) {
       componentRef.setInput('doctorData', {
         name: this.myDoctor().name,
@@ -103,6 +105,10 @@ export class Appointment implements OnInit {
         image: this.myDoctor().image,
       });
     }
+
+    componentRef.instance.newDocRank.subscribe((data) => {
+      this.dataAfterReview(data);
+    });
   }
   startReviewing(rank: number): void {
     // console.log('from appointment rank', rank);
@@ -117,5 +123,14 @@ export class Appointment implements OnInit {
     }
     // console.log('event.target', event.target);
     // console.log('event.currentTarget', event.currentTarget);
+  }
+  dataAfterReview(data: { newRank: number; totalReviewers: number }) {
+    this.myDoctor.update((v) => {
+      const newRankData = {
+        rank: data.newRank,
+        totalReviewers: data.totalReviewers,
+      };
+      return { ...v, ...newRankData };
+    });
   }
 }

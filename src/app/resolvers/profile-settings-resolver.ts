@@ -6,6 +6,5 @@ import { ApiResponse } from '../interfaces/api-response';
 
 export const profileSettingsResolver: ResolveFn<Observable<ApiResponse>> = (route, state) => {
   const userService = inject(UserService);
-  console.log('from resolver ', userService.profile());
   return userService.profile();
 };
