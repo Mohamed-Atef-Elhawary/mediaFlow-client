@@ -57,15 +57,21 @@ export const routes: Routes = [
 
   ///////////////////////////////////////////////////////////
   {
+    path: 'request-reset',
+    loadComponent: () => import('./pages/request-reset/request-reset').then((c) => c.RequestReset),
+  },
+  {
+    path: 'reset-password',
+    loadComponent: () =>
+      import('./pages/reset-password/reset-password').then((c) => c.ResetPassword),
+  },
+
+  {
     path: '**',
     loadComponent: () => import('./pages/not-found/not-found').then((c) => c.NotFound),
   },
   // {
   //   path: 'rank',
   //   loadComponent: () => import('./components/doc-rank/doc-rank').then((c) => c.DocRank),
-  // },
-  // {
-  //   path: 'all',
-  //   loadComponent: () => import('./components/all-reviews/all-reviews').then((c) => c.AllReviews),
   // },
 ];

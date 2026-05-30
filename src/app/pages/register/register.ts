@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, computed, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthView } from '../../types/authType';
 import { AuthService } from '../../services/auth-service';
 import { PhotoService } from '../../services/photo-service';
@@ -9,19 +9,22 @@ import { UserRegister } from '../../interfaces/user-register';
 import { UserLogin } from '../../interfaces/user-login';
 import { ToastrService } from 'ngx-toastr';
 import { toastConfig } from '../../config/toastConfig';
+import { PasswordResetService } from '../../services/password-reset-service';
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
 export class Register implements OnInit {
   userForm!: FormGroup;
   logo: string;
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private authService: AuthService,
+    private passwordResetService: PasswordResetService,
     private photo: PhotoService,
     private toastr: ToastrService,
     private router: Router,

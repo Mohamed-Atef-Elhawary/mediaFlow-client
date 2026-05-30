@@ -6,16 +6,16 @@
     </h2>
   </div>
 
-  <div class="w-full sm:w-[50%] p-[20px]">
+  <div class="w-full sm:w-[50%] p-[20px] flex justify-center">
     <form
       [formGroup]="userForm"
       (ngSubmit)="submit()"
-      class="p-[20px] w-full flex flex-col gap-y-5"
+      class="p-[20px] w-full sm:w-[80%] flex flex-col gap-y-5 border-2 border-sky-100"
     >
       <div class="flex flex-col gap-y-[5px]">
         <label class="text-lg font-medium" for="em">Email</label>
         <input
-          class="border outline-0 w-full sm:w-[30vw] p-[5px]"
+          class="border outline-0 w-full p-[5px]"
           [ngClass]="
             email?.touched && email?.invalid && email?.dirty ? 'border-danger' : 'border-sky-300'
           "
@@ -39,7 +39,7 @@
               ? 'border-danger'
               : 'border-sky-300'
           "
-          class="border outline-0 w-full sm:w-[30vw] p-[5px]"
+          class="border outline-0 w-full p-[5px]"
           type="text"
           id="ps"
           formControlName="password"
@@ -54,7 +54,38 @@
           }
         }
 
+        @if (authView() === 'signup') {
+          <div class="flex flex-col gap-y-[5px]">
+            <label class="text-lg font-medium" for="fn">Username</label>
+            <input
+              [ngClass]="
+                name?.touched && name?.invalid && name?.dirty ? 'border-danger' : 'border-sky-300'
+              "
+              class="border outline-0 w-full p-[5px]"
+              type="text"
+              id="fn"
+              formControlName="name"
+            />
+            @if (name?.touched && name?.invalid && name?.dirty) {
+              @if (name?.getError('required')) {
+                <div class="text-danger">Name is required</div>
+              } @else if (
+                name?.getError('pattern') ||
+                name?.getError('maxlength') ||
+                name?.getError('minlength')
+              ) {
+                <div class="text-danger">Name is invalid</div>
+              }
+            }
+          </div>
+        }
+
         @if (authView() === 'signin') {
+          <div>
+            <p class="text-gray-400 cursor-pointer" routerLink="/request-reset">
+              forget your password
+            </p>
+          </div>
           <p class="text-secondary">
             New to MediaFlow?
             <span (click)="update('signup')" class="text-primary cursor-pointer"
@@ -73,36 +104,10 @@
         }
       </div>
 
-      @if (authView() === 'signup') {
-        <div class="flex flex-col gap-y-[5px]">
-          <label class="text-lg font-medium" for="fn">Username</label>
-          <input
-            [ngClass]="
-              name?.touched && name?.invalid && name?.dirty ? 'border-danger' : 'border-sky-300'
-            "
-            class="border outline-0 w-full sm:w-[30vw] p-[5px]"
-            type="text"
-            id="fn"
-            formControlName="name"
-          />
-          @if (name?.touched && name?.invalid && name?.dirty) {
-            @if (name?.getError('required')) {
-              <div class="text-danger">Name is required</div>
-            } @else if (
-              name?.getError('pattern') ||
-              name?.getError('maxlength') ||
-              name?.getError('minlength')
-            ) {
-              <div class="text-danger">Name is invalid</div>
-            }
-          }
-        </div>
-      }
-
       <button
         [disabled]="userForm.invalid"
         [ngClass]="userForm.invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
-        class="bg-green-500 font-semibold p-2 text-[3vw] sm:text-lg w-full sm:w-[30vw] text-white"
+        class="bg-green-500 font-semibold p-2 text-[3vw] sm:text-lg w-full text-white"
       >
         {{ authView() === 'signin' ? 'Sign In' : 'Sign Up' }}
       </button>
