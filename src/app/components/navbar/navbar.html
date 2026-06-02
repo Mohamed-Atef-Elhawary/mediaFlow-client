@@ -1,12 +1,15 @@
 <nav class="h-[5vw] fixed top-0 left-0 right-0 z-50">
-  <div class="flex items-center justify-between h-full mx-4 sm:mx-[5%] bg-gray-50">
+  <div
+    class="flex items-center justify-between h-full mx-4 sm:mx-[5%] bg-gray-50 dark:bg-slate-900"
+  >
     <div class="flex items-center gap-6 justify-between lg:justify-start w-[55%]">
       @if (authView() === 'authorized') {
         @for (link of links; track $index) {
           <ul class="hidden lg:flex items-center gap-x-8 sm:order-1 capitalize text-lg">
+            <!-- not-[.acitve]:hover:text-red-500 -->
             <li
-              routerLinkActive="text-primary  font-bold active"
-              class="cursor-pointer text-[1.5vw] :[&:not-[.active]:hover]:text-sky-300"
+              routerLinkActive="text-primary dark:text-white font-bold active"
+              class="cursor-pointer text-[1.5vw] dark:text-slate-50 not-[.active]:hover:text-danger"
               [routerLink]="['/', link]"
             >
               {{ link }}
@@ -24,17 +27,17 @@
       <!-- start menu -->
       <!-- bars and x -->
       @if (authView() === 'authorized') {
-        <div class="lg:hidden -order-1">
-          @if (shownavLinks()) {
+        <div #switchNavLinks class="lg:hidden -order-1">
+          @if (showNavLinks()) {
             <fa-icon
-              (click)="switchVavLinks()"
-              class="w-8 h-[1vw] sm:h-[3vh]"
+              (click)="switchShowNavLinks(false)"
+              class="w-8 h-[1vw] sm:h-[3vh] dark:text-white"
               [icon]="xmark"
             ></fa-icon>
           } @else {
             <fa-icon
-              (click)="switchVavLinks()"
-              class="w-8 h-[1vw] sm:h-[3vh]"
+              (click)="switchShowNavLinks(true)"
+              class="w-8 h-[1vw] sm:h-[3vh] dark:text-white"
               [icon]="bars"
             ></fa-icon>
           }
@@ -47,14 +50,14 @@
       <div class="flex gap-3">
         <button
           (click)="update('signin')"
-          class="hover:bg-sky-400 hover:border-0 text-dark border border-secondary font-bold text-[1.5vw] py-[1vw] px-[20px] sm:px-[3vw] md:px-[2vw] shrink-0 cursor-pointer"
+          class="hover:bg-sky-400 text-dark border border-secondary font-bold text-[1.5vw] py-[1vw] px-[20px] sm:px-[3vw] md:px-[2vw] shrink-0 cursor-pointer dark:text-slate-200"
         >
           Sign in
         </button>
 
         <button
           (click)="update('signup')"
-          class="hidden lg:block bg-red-400 hover:bg-danger text-white font-bold text-[1.5vw] px-[2vw] py-[1vw] shrink-0 cursor-pointer"
+          class="hidden lg:block bg-red-300 hover:bg-danger text-white font-bold text-[1.5vw] px-[2vw] py-[1vw] shrink-0 cursor-pointer"
         >
           Sign up
         </button>
@@ -65,7 +68,6 @@
           #switchUserMenu
           (click)="switchShowUserMenu()"
           [src]="userImage()"
-          alt=""
           class="block w-full h-full"
         />
       </div>
@@ -75,15 +77,27 @@
   <!-- calc(100vw_-_(8_*_4px) :8 is margein left and right * 4px because 1 in tailwind = 4px -->
   <div
     [ngClass]="showUserMenu() ? 'block' : 'hidden'"
-    class="absolute right-0 overflow-hidden text-center w-[calc(100vw_-_(8_*_4px))] sm:w-[200px] mx-4 sm:mx-[5%]"
+    class="absolute right-0 text-center w-[calc(100vw_-_(8_*_4px))] sm:w-[250px] mx-4 sm:mx-[5%]"
   >
     <div #userMenu></div>
   </div>
   <!-- navlinks -->
   <div
-    [ngClass]="shownavLinks() ? 'block' : 'hidden'"
-    class="lg:hidden absolute left-0 overflow-hidden bg-amber-300 text-center w-[calc(100vw_-_(8_*_4px))] sm:w-[calc(100vw_-_10%)] mx-4 sm:mx-[5%]"
+    [ngClass]="showNavLinks() ? 'block' : 'hidden'"
+    class="lg:hidden absolute left-0 overflow-hidden text-center w-[calc(100vw_-_(8_*_4px))] sm:w-[calc(100vw_-_10%)] mx-4 sm:mx-[5%]"
   >
     <div #navLinks></div>
+  </div>
+
+  <!-- theme options -->
+
+  <div
+    #switchUserMode
+    [ngClass]="showThemeOptions() ? 'fixed' : 'hidden'"
+    class="top-0 left-0 right-0 bottom-0 bg-black/50"
+  >
+    <div class="w-[80%] sm:w-[50%] absolute top-[50%] left-[50%] translate-[-50%]">
+      <div #modesComponent></div>
+    </div>
   </div>
 </nav>

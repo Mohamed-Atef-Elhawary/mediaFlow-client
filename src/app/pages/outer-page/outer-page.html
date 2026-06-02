@@ -1,21 +1,23 @@
-<div class="flex flex-col lg:flex-row grow w-full h-outerHeight">
+<div class="flex flex-col lg:flex-row grow w-full h-auto lg:h-outerHeight dark:bg-slate-800">
   <div class="w-full lg:w-[50%] lg:order-1">
     <img class="w-full h-full object-fit" [src]="outerPhoto" alt="" />
   </div>
   <section class="w-full lg:w-[50%] flex flex-col gap-6 p-10">
-    <h1 class="text-[5vw] font-bold">
+    <h1 class="text-[5vw] font-bold dark:text-white">
       Your Health,
       <br />
       <span class="text-sky-300"> Our Priority</span>
     </h1>
-    <p class="text-[3vw] font-semibold">Book your appointment with top doctors in seconds</p>
+    <p class="text-[3vw] font-semibold dark:text-slate-200">
+      Book your appointment with top doctors in seconds
+    </p>
     <button
       [routerLink]="['/register', 'signup']"
       class="w-[30vw] md:w-[20vw] bg-sky-400 hover:bg-primary text-white font-semibold text-[2vw] px-1 py-2 md:px-3 md:py-4 lg:text-[1.5vw] rounded-full shrink-0 cursor-pointer"
     >
       Get Started Now
     </button>
-    <p class="text-[2vw] font-medium">
+    <p class="text-[2vw] font-medium dark:text-white">
       Already have an account?
       <span [routerLink]="['/register', 'signin']" class="text-sky-300 cursor-pointer"
         >Sign in</span

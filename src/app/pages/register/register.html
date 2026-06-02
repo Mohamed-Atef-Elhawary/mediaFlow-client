@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-between items-center gap-y-5 overflow-hidden">
   <div class="flex justify-center items-center flex-col gap-y-3">
-    <img class="w-15 h-15 rounded-full bg-dark" [src]="logo" alt="" />
-    <h2 class="text-xl font-semibold">
+    <img class="w-15 h-15 rounded-full bg-dark dark:bg-slate-200" [src]="logo" alt="" />
+    <h2 class="text-xl font-semibold dark:text-white">
       {{ authView() === 'signin' ? 'Sign in' : 'sign up' }} to MediaFlow
     </h2>
   </div>
@@ -10,9 +10,9 @@
     <form
       [formGroup]="userForm"
       (ngSubmit)="submit()"
-      class="p-[20px] w-full sm:w-[80%] flex flex-col gap-y-5 border-2 border-sky-100"
+      class="p-[20px] w-full sm:w-[80%] flex flex-col gap-y-5 border-2 border-sky-100 dark:bg-slate-800"
     >
-      <div class="flex flex-col gap-y-[5px]">
+      <div class="flex flex-col gap-y-[5px] dark:text-white">
         <label class="text-lg font-medium" for="em">Email</label>
         <input
           class="border outline-0 w-full p-[5px]"
@@ -31,7 +31,7 @@
           }
         }
       </div>
-      <div class="flex flex-col gap-y-[5px]">
+      <div class="flex flex-col gap-y-[5px] dark:text-white">
         <label class="text-lg font-medium" for="ps">Password</label>
         <input
           [ngClass]="
@@ -53,56 +53,58 @@
             <div class="text-danger">Enter a strong password</div>
           }
         }
+      </div>
 
-        @if (authView() === 'signup') {
-          <div class="flex flex-col gap-y-[5px]">
-            <label class="text-lg font-medium" for="fn">Username</label>
-            <input
-              [ngClass]="
-                name?.touched && name?.invalid && name?.dirty ? 'border-danger' : 'border-sky-300'
-              "
-              class="border outline-0 w-full p-[5px]"
-              type="text"
-              id="fn"
-              formControlName="name"
-            />
-            @if (name?.touched && name?.invalid && name?.dirty) {
-              @if (name?.getError('required')) {
-                <div class="text-danger">Name is required</div>
-              } @else if (
-                name?.getError('pattern') ||
-                name?.getError('maxlength') ||
-                name?.getError('minlength')
-              ) {
-                <div class="text-danger">Name is invalid</div>
-              }
+      @if (authView() === 'signup') {
+        <div class="flex flex-col gap-y-[5px] dark:text-white">
+          <label class="text-lg font-medium" for="fn">Username</label>
+          <input
+            [ngClass]="
+              name?.touched && name?.invalid && name?.dirty ? 'border-danger' : 'border-sky-300'
+            "
+            class="border outline-0 w-full p-[5px]"
+            type="text"
+            id="fn"
+            formControlName="name"
+          />
+          @if (name?.touched && name?.invalid && name?.dirty) {
+            @if (name?.getError('required')) {
+              <div class="text-danger">Name is required</div>
+            } @else if (
+              name?.getError('pattern') ||
+              name?.getError('maxlength') ||
+              name?.getError('minlength')
+            ) {
+              <div class="text-danger">Name is invalid</div>
             }
-          </div>
-        }
+          }
+        </div>
+      }
 
-        @if (authView() === 'signin') {
+      @if (authView() === 'signin') {
+        <div>
           <div>
-            <p class="text-gray-400 cursor-pointer" routerLink="/request-reset">
+            <p class="text-gray-400 cursor-pointer dark:text-slate-200" routerLink="/request-reset">
               forget your password
             </p>
           </div>
-          <p class="text-secondary">
+          <p class="text-secondary dark:text-slate-400">
             New to MediaFlow?
             <span (click)="update('signup')" class="text-primary cursor-pointer"
               >Create an account</span
             >
           </p>
-        } @else if (authView() === 'signup') {
-          <p class="text-secondary">
-            Already have an account?<span
-              (click)="update('signin')"
-              class="text-primary cursor-pointer"
-            >
-              Sign in →</span
-            >
-          </p>
-        }
-      </div>
+        </div>
+      } @else if (authView() === 'signup') {
+        <p class="text-secondary dark:text-slate-300">
+          Already have an account?<span
+            (click)="update('signin')"
+            class="text-primary cursor-pointer"
+          >
+            Sign in →</span
+          >
+        </p>
+      }
 
       <button
         [disabled]="userForm.invalid"

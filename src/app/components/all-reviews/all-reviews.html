@@ -1,4 +1,4 @@
-<div>
+<div class="dark:pl-1">
   <div class="flex flex-col gap-6">
     @for (review of reviews(); track $index) {
       <div class="flex flex-col gap-2">
@@ -9,7 +9,7 @@
             [src]="review.userId.image"
             alt=""
           />
-          <p class="lg:text-[1.2vw] text-secondary">{{ review.userId.name }}</p>
+          <p class="lg:text-[1.2vw] text-secondary dark:text-white">{{ review.userId.name }}</p>
         </div>
         <!-- ranks && comments -->
         <div>
@@ -26,18 +26,25 @@
                 ></fa-icon>
               }
             </div>
-            <p class="text-sm lg:text-[1.1vw] text-gray-400">{{ review.createdAt | date }}</p>
+            <p class="text-sm lg:text-[1.1vw] text-gray-400 dark:text-slate-400">
+              {{ review.createdAt | date }}
+            </p>
           </div>
-          <p class="text-sm lg:text-[1.1vw] text-gray-400">{{ review.comment }}</p>
+          <p class="text-sm lg:text-[1.1vw] text-gray-600 dark:text-slate-300">
+            {{ review.comment }}
+          </p>
         </div>
         <!-- helpfull vots -->
         <div class="text-sm lg:text-[1vw] text-gray-400">
           @if (review.helpfulVotes.length) {
-            <span>{{ review.helpfulVotes.length }} people found this review helpful</span>
+            <p>
+              <span class="text-danger">{{ review.helpfulVotes.length }} </span>people found this
+              review helpful
+            </p>
           }
           <p></p>
           <div class="flex gap-3 items-center">
-            <p class="text-sm lg:text-[1vw] text-gray-400 mb-1">Did you find this helpful?</p>
+            <p class="text-sm lg:text-[1vw] text-sky-400 mb-1">Did you find this helpful?</p>
             <div class="flex gap-2">
               <button
                 (click)="helpfulReview(review._id, review.helpfulVotes)"

@@ -12,6 +12,12 @@
   --height-outerHeight: calc(100vh - (5vw + 8px));
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  @apply transition-colors duration-300;
+}
+
 ::-webkit-scrollbar {
   @apply hidden;
 }

@@ -1,7 +1,7 @@
-<div class="flex flex-col gap-4 lg:pr-[20vw]">
+<div class="flex flex-col gap-4 lg:pr-[20vw] dark:p-1">
   <div>
-    <h2 class="text-xl md:text-[1.4vw] font-semibold">Rate this doctor</h2>
-    <p class="md:text-[1.3vw] text-secondary">Tell others what you think.</p>
+    <h2 class="text-xl md:text-[1.4vw] font-semibold dark:text-white">Rate this doctor</h2>
+    <p class="md:text-[1.3vw] text-secondary dark:text-slate-400">Tell others what you think.</p>
   </div>
   <!--start stars -->
   <div class="flex flex-col gap-3 lg:flex-row lg:justify-between">
@@ -30,7 +30,7 @@
 
   <!-- start Ratings and reviews  -->
   <div>
-    <div class="flex items-center gap-2 text-xl md:text-[1.4vw]">
+    <div class="flex items-center gap-2 text-xl md:text-[1.4vw] dark:text-white">
       <h2>Ratings and reviews</h2>
       <fa-icon
         [routerLink]="['/appointment/', ranking()._id]"
@@ -46,12 +46,14 @@
   <div class="flex gap-4">
     <!-- startrank -->
     <div class="w-fit sm:w-[20%] shrink-0">
-      <p class="text-[50px]">{{ docRank().rank.decimal }}.{{ docRank().rank.frag }}</p>
+      <p class="text-[50px] dark:text-white">
+        {{ docRank().rank.decimal }}.{{ docRank().rank.frag }}
+      </p>
       <div class="flex gap-[2px]">
         @for (rank of [1, 2, 3, 4, 5]; track $index) {
           <div class="relative w-fit">
             <div class="text-gray-300">
-              <fa-icon class="text-[12px]" [icon]="starIcon"></fa-icon>
+              <fa-icon class="text-[12px] lg-text-[3vw]" [icon]="starIcon"></fa-icon>
             </div>
 
             @if (rank <= docRank().rank.decimal) {
@@ -70,14 +72,14 @@
         }
       </div>
 
-      <p class="text-secondary">Reviewers {{ docRank().totalReviewers }}</p>
+      <p class="text-secondary dark:text-slate-300">Reviewers {{ docRank().totalReviewers }}</p>
     </div>
     <!-- endrank -->
     <!-- start rating distribution -->
     <div class="sm:w-[80%] flex flex-col grow">
       @for (dist of [5, 4, 3, 2, 1]; track $index) {
         <div class="flex gap-2 items-center w-full">
-          <p class="text-secondary text-[12px]">{{ dist }}</p>
+          <p class="text-secondary text-[12px] dark:text-slate-200">{{ dist }}</p>
           <div class="bg-gray-200 h-[8px] grow-1 rounded-full overflow-hidden">
             <div
               [style.width]="docRank().ratingDistribution[dist]"

@@ -1,37 +1,37 @@
-<div class="bg-white border border-gray-300 bg-red-0 w-full p-4 overflow-hidden">
+<div class="bg-white dark:bg-slate-900 border border-gray-300 w-full p-4 overflow-hidden">
   <ul class="flex flex-col gap-4 whitespace-nowrap">
-    <li routerLink="/home" routerLinkActive="!bg-primary active group ">
+    <li routerLink="/home" routerLinkActive="bg-primary active group dark:bg-slate-600 ">
       <div
-        class="flex gap-2 items-center p-1 cursor-pointer group-[.active]:hover:bg-transparent hover:bg-sky-100"
+        class="flex gap-2 items-center p-1 cursor-pointer group-[.active]:hover:bg-transparent hover:bg-sky-100 hover:text-danger group-[.active]:hover:text-black dark:hover:bg-slate-700 dark:text-white dark:group-[.active]:hover:text-white"
       >
         <fa-icon [icon]="homeIcon"></fa-icon>
-        <p class="group-[.active]:text-white text-secondary">Home</p>
+        <p>Home</p>
       </div>
     </li>
 
-    <li routerLink="/doctors" routerLinkActive="bg-primary active group">
+    <li routerLink="/doctors" routerLinkActive="bg-primary active group dark:bg-slate-600">
       <div
-        class="flex gap-2 items-center p-1 cursor-pointer hover:bg-sky-100 group-[.active]:hover:bg-transparent"
+        class="flex gap-2 items-center p-1 cursor-pointer group-[.active]:hover:bg-transparent hover:bg-sky-100 hover:text-danger group-[.active]:hover:text-black dark:hover:bg-slate-700 dark:text-white dark:group-[.active]:hover:text-white"
       >
         <fa-icon [icon]="doctorIcon"></fa-icon>
-        <p class="text-secondary group-[.active]:text-white">Doctors</p>
+        <p>Doctors</p>
       </div>
     </li>
 
-    <li routerLink="/about" routerLinkActive="bg-primary active group">
+    <li routerLink="/about" routerLinkActive="bg-primary active group dark:bg-slate-600">
       <div
-        class="flex gap-2 items-center p-1 cursor-pointer group-[.is-active]:hover:bg-transparent hover:bg-sky-100"
+        class="flex gap-2 items-center p-1 cursor-pointer group-[.active]:hover:bg-transparent hover:bg-sky-100 hover:text-danger group-[.active]:hover:text-black dark:hover:bg-slate-700 dark:text-white dark:group-[.active]:hover:text-white"
       >
         <fa-icon [icon]="aboutIcon"></fa-icon>
-        <p class="text-secondary group-[.active]:text-white">About</p>
+        <p>About</p>
       </div>
     </li>
-    <li routerLinkActive="bg-primary active group" routerLink="/contact">
+    <li routerLinkActive="bg-primary active group dark:bg-slate-600" routerLink="/contact">
       <div
-        class="flex gap-2 items-center p-1 cursor-pointer group-[.active]:hover:bg-transparent hover:bg-sky-100"
+        class="flex gap-2 items-center p-1 cursor-pointer group-[.active]:hover:bg-transparent hover:bg-sky-100 hover:text-danger group-[.active]:hover:text-black dark:hover:bg-slate-700 dark:text-white dark:group-[.active]:hover:text-white"
       >
         <fa-icon [icon]="contactIcon"></fa-icon>
-        <p class="text-secondary group-[.active]:text-white">Contact</p>
+        <p>Contact</p>
       </div>
     </li>
   </ul>

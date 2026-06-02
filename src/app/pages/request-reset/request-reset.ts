@@ -8,9 +8,10 @@ import { ApiResponse } from '../../interfaces/api-response';
 import { toastConfig } from '../../config/toastConfig';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-request-reset',
-  imports: [RouterLink, FormsModule, FontAwesomeModule],
+  imports: [RouterLink, FormsModule, FontAwesomeModule, NgClass],
   templateUrl: './request-reset.html',
   styleUrl: './request-reset.css',
 })

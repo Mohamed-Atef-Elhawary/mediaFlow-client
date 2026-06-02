@@ -16,8 +16,8 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../services/auth-service';
 import { AuthView } from '../../types/authType';
-import { OuterPage } from '../../pages/outer-page/outer-page';
 import { NgClass } from '@angular/common';
+import { ThemeService } from '../../services/theme-service';
 
 @Component({
   selector: 'app-navbar',
@@ -31,27 +31,45 @@ export class Navbar implements AfterViewInit {
   xmark = faXmark;
   bars = faBars;
   links: string[] = ['home', 'doctors', 'about', 'contact'];
-  shownavLinks = signal<boolean>(false);
-  @ViewChild('userMenu', { read: ViewContainerRef }) myMenue!: ViewContainerRef;
-  @ViewChild('switchUserMenu', { read: ElementRef }) mydiv!: ElementRef;
+  showNavLinks = signal<boolean>(false);
+
   @ViewChild('navLinks', { read: ViewContainerRef }) myNavLinks!: ViewContainerRef;
+  @ViewChild('userMenu', { read: ViewContainerRef }) myMenue!: ViewContainerRef;
+  @ViewChild('modesComponent', { read: ViewContainerRef }) myModes!: ViewContainerRef;
+  @ViewChild('switchNavLinks', { read: ElementRef }) navLinkesSwitcher!: ElementRef;
+  @ViewChild('switchUserMenu', { read: ElementRef }) userMenuSwitcher!: ElementRef;
+  @ViewChild('switchUserMode', { read: ElementRef }) userModeSwitcher!: ElementRef;
+
   constructor(
     private photo: PhotoService,
     private authService: AuthService,
+    private themeService: ThemeService,
     private router: Router,
   ) {
     this.logo = this.photo.static.logo;
     this.logo1 = this.photo.static.logo1;
   }
   showUserMenu: Signal<boolean> = computed(() => this.authService.showUserMenu());
+  showThemeOptions: Signal<boolean> = computed(() => this.themeService.showOptions());
+
   ngAfterViewInit(): void {
     this.getUserMenu();
     this.getNavLinks();
-
+    this.getModesOptions();
     document.addEventListener('click', (event) => {
       if (this.authService.authView() === 'authorized') {
-        if (event.target !== this.mydiv.nativeElement) {
+        if (event.target !== this.userMenuSwitcher.nativeElement) {
           this.authService.showUserMenu.set(false);
+        }
+        if (event.target === this.userModeSwitcher.nativeElement) {
+          this.themeService.showOptions.set(false);
+        }
+        if (this.showNavLinks()) {
+          let svg = this.navLinkesSwitcher.nativeElement.querySelector('svg');
+          let icon = svg.getAttribute('data-icon');
+          if (icon == 'xmark') {
+            this.showNavLinks.set(false);
+          }
         }
       }
     });
@@ -62,40 +80,53 @@ export class Navbar implements AfterViewInit {
     this.myMenue.clear();
     this.myMenue.createComponent(menuComponent);
   }
+
   switchShowUserMenu() {
     this.authService.showUserMenu.update((v) => !v);
     if (this.showUserMenu()) {
-      this.shownavLinks.set(false);
+      this.showNavLinks.set(false);
     }
   }
+
   async getNavLinks() {
-    const myCom = await import('../nav-links/nav-links').then((c) => c.NavLinks);
+    const linksCom = await import('../nav-links/nav-links').then((c) => c.NavLinks);
     this.myNavLinks.clear();
-    this.myNavLinks.createComponent(myCom);
+    this.myNavLinks.createComponent(linksCom);
   }
-  switchVavLinks() {
-    this.shownavLinks.update((v) => !v);
+
+  switchShowNavLinks(state: boolean) {
+    this.showNavLinks.set(state);
   }
-  show() {
-    console.log('from navbar', this.authView());
+
+  async getModesOptions() {
+    const modesCom = await import('../modes-component/modes-component').then(
+      (c) => c.ModesComponent,
+    );
+    this.myModes.clear();
+    this.myModes.createComponent(modesCom);
   }
 
   authView = computed(() => {
+    console.log('from navBar', this.authService.authView());
     return this.authService.authView();
   });
+
   userImage = computed(() => {
     return this.authService.userData()?.image;
   });
+
   signinOrHome() {
     if (this.authView() === 'authorized') {
+      this.authService.authView.set('authorized');
       this.router.navigate(['/home']);
     } else {
-      // this.authService.authView.set('outer');
+      this.authService.authView.set('outer');
       this.router.navigate(['outer']);
     }
   }
+
   update(state: AuthView) {
     this.router.navigate(['register', state]);
-    this.show();
+    this.authService.authView.set(state);
   }
 }

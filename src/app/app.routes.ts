@@ -67,11 +67,16 @@ export const routes: Routes = [
   },
 
   {
+    path: 'menu',
+    loadComponent: () => import('./components/user-menu/user-menu').then((c) => c.UserMenu),
+  },
+  {
+    path: 'mode',
+    loadComponent: () =>
+      import('./components/modes-component/modes-component').then((c) => c.ModesComponent),
+  },
+  {
     path: '**',
     loadComponent: () => import('./pages/not-found/not-found').then((c) => c.NotFound),
   },
-  // {
-  //   path: 'rank',
-  //   loadComponent: () => import('./components/doc-rank/doc-rank').then((c) => c.DocRank),
-  // },
 ];

@@ -6,14 +6,14 @@
         <img class="w-full h-full object-cover" [src]="doctorData().image" />
       </div>
       <div>
-        <h2 class="text-xl lg:text-[1.4vw]">{{ doctorData().name }}</h2>
-        <p class="text-sm lg:text-[1.2vw] text-secondary">Rate this doctor</p>
+        <h2 class="text-xl lg:text-[1.4vw] dark:text-white">{{ doctorData().name }}</h2>
+        <p class="text-sm lg:text-[1.2vw] text-secondary dark:text-slate-300">Rate this doctor</p>
       </div>
     </div>
     <div>
       <fa-icon
         (click)="endReviewing()"
-        class="text-xl lg:text-[1.4vw] text-primary hover:text-danger cursor-pointer"
+        class="text-xl lg:text-[1.4vw] text-red-300 hover:text-danger cursor-pointer"
         [icon]="xIcon"
       ></fa-icon>
     </div>
@@ -24,7 +24,7 @@
       <img class="w-full h-full object-cover" [src]="userData()?.image" />
     </div>
     <div>
-      <h2 class="lg:text-[1.3vw]">{{ userData()?.name }}</h2>
+      <h2 class="lg:text-[1.3vw] dark:text-white">{{ userData()?.name }}</h2>
     </div>
   </div>
 
@@ -47,14 +47,14 @@
     <!-- textArea -->
     <div class="w-full h-[60px] overflow-scroll">
       <textarea
-        class="block outline-0 border-2 px-2 caret-primary text-secondary pt-[15px] border-primary h-full w-full overflow-scroll"
-        placeholder="Describe your experience"
+        class="block outline-0 border-2 px-2 caret-primary text-secondary pt-[15px] border-primary h-full w-full overflow-scroll dark:text-slate-400"
+        placeholder="Describe your experience (Optionally)"
         formControlName="comment"
       ></textarea>
     </div>
     <!-- des -->
     <div>
-      <p class="text-sm lg:text-[1.2vw] text-secondary">
+      <p class="text-sm lg:text-[1.2vw] text-danger">
         Reviews are public and include your info. Everyone can see your name and photo.
       </p>
     </div>

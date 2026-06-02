@@ -1,12 +1,12 @@
-<section class="flex flex-col gap-8 bg-gray-100 p-4">
-  <h1 class="text-lg md:text-[1.5vw] text-secondary">Booking Appointment</h1>
+<section class="flex flex-col gap-8 bg-gray-100 p-4 dark:bg-slate-700">
+  <h1 class="text-lg md:text-[1.5vw] text-secondary dark:text-slate-300">Booking Appointment</h1>
   <div class="flex gap-6 w-full overflow-scroll">
     @for (day of daysOfWeek; let i = $index; track $index) {
       <div
         [ngClass]="
           dayIndex() === i ? 'bg-primary text-white' : 'bg-gray-100 border-2 border-gray-300'
         "
-        class="shrink-0 flex flex-col items-center text-lg md:text-[1.5vw] w-[50px] md:w-[3.5vw] p-1 overflow-hidden cursor-pointer"
+        class="shrink-0 flex flex-col items-center md:text-[1.5vw] w-[60px] md:w-[4vw] p-1 overflow-hidden cursor-pointer hover:bg-danger hover:text-white"
         (click)="getTimeArrayAndUpdateAppointmentDate(day.dayName); dayIndex.set(i)"
       >
         <p>{{ day.dayName }}</p>
@@ -19,8 +19,8 @@
       <p
         [ngClass]="
           appointmentTime() === time.time
-            ? 'bg-primary text-white'
-            : 'bg-gray-100 border-2 border-gray-300'
+            ? 'bg-primary text-white '
+            : 'bg-gray-100 border-2 border-gray-300 hover:bg-danger hover:text-white'
         "
         (click)="appointmentTime.set(time.time)"
         class="bg-amber-200 w-fit py-1 px-2 md:text-[1.5vw] shrink-0 cursor-pointer"

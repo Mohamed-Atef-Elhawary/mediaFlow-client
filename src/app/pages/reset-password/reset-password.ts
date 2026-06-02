@@ -17,10 +17,11 @@ import { toastConfig } from '../../config/toastConfig';
 import { UserLogin } from '../../interfaces/user-login';
 import { AuthService } from '../../services/auth-service';
 import { LoginResponse } from '../../interfaces/login-response';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-reset-password',
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, NgClass],
   templateUrl: './reset-password.html',
   styleUrl: './reset-password.css',
 })
@@ -41,6 +42,7 @@ export class ResetPassword implements OnInit {
     private cdr: ChangeDetectorRef,
   ) {
     this.logo = this.photo.static.logo;
+    this.authService.authView.set('signin');
   }
   ngOnInit() {
     this.route.queryParams.subscribe((res) => {

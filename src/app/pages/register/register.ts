@@ -33,6 +33,7 @@ export class Register implements OnInit {
   }
 
   ngOnInit() {
+    console.log('form register', this.authService.authView());
     this.route.paramMap.subscribe((param) => {
       let state = param.get('state');
       if (state === 'signin' || state === 'signup') {

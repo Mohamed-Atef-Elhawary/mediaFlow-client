@@ -1,10 +1,14 @@
-<div class="py-3">
-  <h1 class="text-[3vw] md:text-[1.5vw]">Browse through the doctors specialist.</h1>
+<div class="py-3 mb-1 dark:bg-slate-700">
+  <h1 class="text-[3vw] md:text-[1.5vw] text-dark dark:text-white">
+    Browse through the doctors specialist.
+  </h1>
 </div>
 <div class="flex gap-2 flex-col md:flex-row">
-  <app-speciality-list
-    (selected)="getSpeciality($event)"
-    [selectedSpecialityFromHome]="speciality()"
-  ></app-speciality-list>
+  <div class="dark:bg-slate-700">
+    <app-speciality-list
+      (selected)="getSpeciality($event)"
+      [selectedSpecialityFromHome]="speciality()"
+    ></app-speciality-list>
+  </div>
   <app-all-doctors [speciality]="speciality()"></app-all-doctors>
 </div>

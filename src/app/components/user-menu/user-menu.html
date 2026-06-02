@@ -1,45 +1,52 @@
-<div class="bg-white border border-gray-300 bg-red-0 w-full p-4 overflow-hidden">
-  <!-- <ul class="flex flex-col gap-y-3">
-    <li
-      [ngClass]="true ? 'bg-primary text-white' : 'bg-white text-secondary  hover:bg-gray-200'"
-      class="border border-gray-400 w-full s p-[5px] cursor-pointer text-[3vw] md:text-[1.5vw]"
-    ></li>
-  </ul> -->
-  <!-- profile
-settings
-myappointment -->
+<div class="bg-white border border-gray-300 bg-red-0 w-full p-4 overflow-hidden dark:bg-slate-900">
   <div class="flex gap-2 items-center border-b border-gray-300 mb-4">
     @if (userImage()) {
       <img class="w-15 h-15 rounded-full" [src]="userImage()" alt="" />
     }
-    <h2 class="whitespace-nowrap">name {{ userName() }}</h2>
+    <h2 class="dark:text-white">{{ userName()?.slice(0, 8) }}</h2>
   </div>
 
-  <ul class="flex flex-col gap-4 whitespace-nowrap">
+  <ul class="flex flex-col gap-4">
     <li routerLink="/profile">
-      <div class="flex gap-2 items-center p-1 cursor-pointer hover:bg-sky-100">
+      <div
+        class="flex gap-2 items-center p-1 cursor-pointer hover:bg-sky-100 dark:hover:bg-slate-700 dark:text-white"
+      >
         <fa-icon [icon]="profileIcon"></fa-icon>
-        <p class="text-secondary">Profile</p>
+        <p class="text-secondary dark:text-slate-400">Profile</p>
       </div>
     </li>
 
     <li routerLink="/myappointment">
-      <div class="flex gap-2 items-center p-1 cursor-pointer hover:bg-sky-100">
+      <div
+        class="flex gap-2 items-center p-1 cursor-pointer hover:bg-sky-100 dark:hover:bg-slate-700 dark:text-white"
+      >
         <fa-icon [icon]="appointmentIcon"></fa-icon>
-        <p class="text-secondary">Appointments</p>
+        <p class="text-secondary dark:text-slate-400">Appointments</p>
       </div>
     </li>
 
     <li routerLink="/settings">
-      <div class="flex gap-2 items-center p-1 cursor-pointer hover:bg-sky-100">
+      <div
+        class="flex gap-2 items-center p-1 cursor-pointer hover:bg-sky-100 dark:hover:bg-slate-700 dark:text-white"
+      >
         <fa-icon [icon]="settingIcon"></fa-icon>
-        <p class="text-secondary">Settings</p>
+        <p class="text-secondary dark:text-slate-400">Settings</p>
+      </div>
+    </li>
+    <li (click)="showModeOptions()">
+      <div
+        class="flex gap-2 items-center p-1 cursor-pointer hover:bg-sky-100 dark:hover:bg-slate-700 dark:text-white"
+      >
+        <fa-icon [icon]="themeIcon"></fa-icon>
+        <p class="text-secondary dark:text-slate-400">Theme</p>
       </div>
     </li>
     <li routerLink="/outer" (click)="signOut()">
-      <div class="flex gap-2 items-center p-1 cursor-pointer hover:bg-sky-100">
+      <div
+        class="flex gap-2 items-center p-1 cursor-pointer hover:bg-sky-100 dark:hover:bg-slate-700 dark:text-white"
+      >
         <fa-icon [icon]="signoutIcon"></fa-icon>
-        <p class="text-secondary">Sign out</p>
+        <p class="text-secondary dark:text-slate-400">Sign out</p>
       </div>
     </li>
   </ul>

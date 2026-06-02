@@ -1,6 +1,6 @@
-<div class="">
+<div class="dark:bg-slate-800">
   @if (myAppointments().length) {
-    <h1 class="py-6 font-semibold text-2lg md:text-[1.5vw]">My Appointments</h1>
+    <h1 class="py-6 font-semibold text-2lg md:text-[1.5vw] dark:text-white">My Appointments</h1>
     <div class="flex flex-col gep-4"></div>
     @for (appointment of myAppointments(); track $index) {
       <div
@@ -12,34 +12,46 @@
           </div>
           <div class="flex flex-col grow justify-between p-2">
             <section>
-              <h2 class="font-medium text-lg md:text-2lg lg:text-[1.5vw] text-dark">
+              <h2
+                class="font-medium text-lg md:text-2lg lg:text-[1.5vw] text-dark dark:text-slate-200"
+              >
                 {{ appointment.docData.name }}
               </h2>
-              <p class="md:text-lg lg:text-[1.4vw] text-secondary">
+              <p class="md:text-lg lg:text-[1.4vw] text-secondary dark:text-slate-400">
                 {{ appointment.docData.speciality }}
               </p>
             </section>
             <section>
-              <h2 class="font-medium text-lg lg:text-[1.3vw] text-gray-600">Address</h2>
-              <p class="text-lg md:text-[1.5vw] lg:text-[1.2] text-secondary">
+              <h2 class="font-medium text-lg lg:text-[1.3vw] text-gray-600 dark:text-slate-300">
+                Address
+              </h2>
+              <p class="text-lg md:text-[1.5vw] lg:text-[1.2] text-secondary dark:text-slate-400">
                 {{ appointment.docData.address.line1 }}
               </p>
-              <p class="text-lg md:text-[1.5vw] lg:text-[1.2] text-secondary">
+              <p class="text-lg md:text-[1.5vw] lg:text-[1.2] text-secondary dark:text-slate-400">
                 {{ appointment.docData.address.line2 }}
               </p>
             </section>
-            <p class="font-medium md:text-[1.4vw] text-gray-600">
+            <p class="font-medium md:text-[1.4vw] text-gray-600 dark:text-slate-300">
               Booking Data
-              <span class="text-secondary">{{ getAppointmentDate(appointment.date) | date }}</span>
+              <span class="text-secondary dark:text-slate-400">{{
+                getAppointmentDate(appointment.date) | date
+              }}</span>
             </p>
           </div>
         </div>
         <div class="w-full md:w-[30%] flex flex-col gap-4 justify-center p-2">
-          <p class="font-medium md:text-[1.4vw] text-gray-600">
-            Appointment Day: <span class="text-secondary">{{ appointment.appointmentDate }}</span>
+          <p class="font-medium md:text-[1.4vw] text-gray-600 dark:text-slate-300">
+            Appointment Day:
+            <span class="text-secondary dark:text-slate-400">{{
+              appointment.appointmentDate
+            }}</span>
           </p>
-          <p class="font-medium md:text-[1.4vw] text-gray-600">
-            Appointment Time: <span class="text-secondary">{{ appointment.appointmentTime }}</span>
+          <p class="font-medium md:text-[1.4vw] text-gray-600 dark:text-slate-300">
+            Appointment Time:
+            <span class="text-secondary dark:text-slate-400">{{
+              appointment.appointmentTime
+            }}</span>
           </p>
           @if (!appointment.isCompleted) {
             <button
@@ -47,7 +59,7 @@
                 'cursor-pointer': !appointment.cancelled,
               }"
               (click)="cancelAppointment(appointment._id)"
-              class="border-2 border-secondary sm:w-[50%] md:w-full py-1 px-3 md:text-[1.4vw] font-medium text-dark hover:text-white hover:bg-primary hover:border-0"
+              class="dark:border-2 dark:border-white sm:w-[50%] md:w-full py-1 px-3 md:text-[1.4vw] font-medium text-dark hover:text-white bg-primary hover:bg-danger dark:text-slate-200"
             >
               Cancel
             </button>
@@ -58,7 +70,7 @@
       </div>
     }
   } @else {
-    <div class="bg-amber-700">
+    <div class="dark:py-1">
       <img class="w-full h-full object-cover" [src]="emptyImage" alt="" />
     </div>
   }

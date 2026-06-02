@@ -1,24 +1,26 @@
-<div class="min-h-[50vh]">
-  <div class="flex flex-col gap-6 border-b border-b-4 border-gray-200 mb-6">
+<div class="min-h-[50vh] dark:p-1">
+  <div class="flex flex-col gap-6 border-b border-b-4 border-slate-300 mb-6 dark:bg-slate-800">
     <div class="w-full h-[50vw] sm:h-[30vw]">
       <img class="w-full h-full object-cover" [src]="userInfo()?.image" alt="" />
     </div>
-    <h1 class="text-lg sm:text-[2.5vw] py-3 font-bold">{{ userInfo()?.name }}</h1>
+    <h1 class="text-lg sm:text-[2.5vw] py-3 font-bold dark:text-white">{{ userInfo()?.name }}</h1>
   </div>
 
   <div class="flex flex-col gap-6">
     <section class="flex flex-col gap-6">
-      <h2 class="text-lg sm:text-[2vw] text-secondary font-semibold">CONTACT INFORMATION</h2>
+      <h2 class="text-lg sm:text-[2vw] text-secondary font-semibold dark:text-slate-300">
+        CONTACT INFORMATION
+      </h2>
       <div class="flex gap-6 sm:text-[1.5vw]">
-        <p class="text-dark">Email id:</p>
+        <p class="text-dark dark:text-slate-400">Email id:</p>
         <p class="text-primary">{{ userInfo()?.email }}</p>
       </div>
       <div class="flex gap-6 sm:text-[1.5vw]">
-        <p class="text-dark">Phone:</p>
+        <p class="text-dark dark:text-slate-400">Phone:</p>
         <p class="text-primary">{{ userInfo()?.phone }}</p>
       </div>
       <div class="flex gap-6 sm:text-[1.5vw]">
-        <p class="text-dark">Address:</p>
+        <p class="text-dark dark:text-slate-400">Address:</p>
         <p class="text-primary">
           {{ userInfo()?.address?.line1 }} <br />
           {{ userInfo()?.address?.line2 }}
@@ -26,13 +28,15 @@
       </div>
     </section>
     <section class="flex flex-col gap-6">
-      <h2 class="text-lg sm:text-[2vw] text-secondary font-semibold">BASIC INFORMATION</h2>
+      <h2 class="text-lg sm:text-[2vw] text-secondary font-semibold dark:text-slate-300">
+        BASIC INFORMATION
+      </h2>
       <div class="flex gap-6 sm:text-[1.5vw]">
-        <p class="text-dark">Gender:</p>
+        <p class="text-dark dark:text-slate-400">Gender:</p>
         <p class="text-primary">{{ userInfo()?.gender }}</p>
       </div>
       <div class="flex gap-6 sm:text-[1.5vw]">
-        <p class="text-dark">Birthday:</p>
+        <p class="text-dark dark:text-slate-400">Birthday:</p>
         <p class="text-primary">{{ userInfo()?.dateOfBirth | date }}</p>
       </div>
     </section>

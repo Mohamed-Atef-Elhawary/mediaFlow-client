@@ -1,8 +1,8 @@
 @if (topDoctors().length) {
-  <div id="topDoctors" class="flex flex-col gap-10 text-center py-8 overflow-hidden bg-sky-50">
+  <div id="topDoctors" class="flex flex-col gap-10 text-center py-8 overflow-hidden">
     <div class="text-center">
-      <h2 class="font-semibold text-[4vw] text-dark mb-4">Top Doctors to Book</h2>
-      <p class="text-[2vw] text-secondary">
+      <h2 class="font-semibold text-[4vw] text-dark mb-4 dark:text-white">Top Doctors to Book</h2>
+      <p class="text-[2vw] text-secondary dark:text-slate-400">
         Simply browse through our extensive list of trusted doctors.
       </p>
     </div>
@@ -11,19 +11,19 @@
       @for (doctor of topDoctors(); track doctor._id) {
         <article
           [routerLink]="['/appointment', doctor._id]"
-          class="h-auto flex flex-col overflow-hidden p-[10px] bg-[#14263c] hover:bg-[#004b84]"
+          class="h-[500px] lg:h-auto overflow-hidden flex flex-col p-[10px] bg-slate-50 hover:bg-sky-100 border-2 border-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
         >
-          <div class="overflow-hidden w-full h-[70%] lg:h-[65%] p-2 shrink-0">
+          <div class="overflow-hidden w-full h-[65%] p-2 shrink-0">
             <img class="block w-full h-full object-cover" [src]="doctor.image" />
           </div>
 
-          <div
-            class="flex flex-col justify-evenly items-start p-2 mt-4 h-[30%] lg:h-[35%] shrink-0"
-          >
-            <p class="font-bold text-[5vw] sm:text-[3vw] md:text-[2vw] text-white">
+          <div class="flex flex-col justify-evenly items-start p-2 mt-4 h-[35%] shrink-0">
+            <p
+              class="font-bold text-[3vw] whitespace-nowrap sm:text-[2vw] text-dark dark:text-white"
+            >
               {{ doctor.name }}
             </p>
-            <p class="text-secondary font-semibold text-[5vw] sm:text-[3vw] md:text-[2vw]">
+            <p class="text-secondary font-semibold text-[3vw] sm:text-[2vw] dark:text-slate-400">
               {{ doctor.speciality }}
             </p>
 
@@ -31,15 +31,15 @@
               @if (doctor.available) {
                 <fa-icon
                   [icon]="availableIcon"
-                  class="rounded-full text-green-700 text-[5vw] sm:text-[3vw] md:text-[2vw]"
+                  class="rounded-full text-green-700 text-[3vw] sm:text-[2vw]"
                 ></fa-icon>
-                <p class="text-green-500 text-[5vw] sm:text-[3vw] md:text-[2vw]">Available</p>
+                <p class="text-green-500 text-[3vw] sm:text-[2vw]">Available</p>
               } @else {
                 <fa-icon
                   [icon]="notAvailableIcon"
-                  class="rounded-full text-secondary text-[5vw] sm:text-[3vw] md:text-[2vw]"
+                  class="rounded-full text-secondary text-[3vw] sm:text-[2vw]"
                 ></fa-icon>
-                <p class="text-secondary text-[5vw] sm:text-[3vw] md:text-[2vw]">Not Available</p>
+                <p class="text-secondary text-[3vw] sm:text-[2vw]">Not Available</p>
               }
             </div>
           </div>
