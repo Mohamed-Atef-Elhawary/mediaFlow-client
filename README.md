@@ -20,16 +20,26 @@ This project demonstrates a clean architecture for media content management, foc
 * **Asynchronous Logic:** RxJS
 * **State Management:** Angular Signals
 
-## How to Run Locally
+## presentation overview
+<img width="1442" height="911" alt="Screenshot 2026-06-05 195730" src="https://github.com/user-attachments/assets/06cf73c8-1df6-438f-a408-b1b245f255ee" />
 
-### Clone the repository.
-git clone https://github.com/Mohamed-Atef-Elhawary/mediaFlow-client.git
 
-### Install dependencies.
-npm install
+<img width="1506" height="912" alt="Screenshot 2026-06-05 200912" src="https://github.com/user-attachments/assets/e2f76a44-b84f-4e06-8de1-8ab841f5ac5c" />
 
-### Start the development server.
-ng serve
 
-## Learning Journey
-This project represents my core focus on mastering modern Angular features, specifically the shift towards Signals and Functional Reactive Programming.
+
+<img width="1446" height="910" alt="Screenshot 2026-06-05 200120 - Copy" src="https://github.com/user-attachments/assets/81bfb7d8-5b97-466f-a5f7-4a6787a8bb62" />
+
+
+
+<img width="1491" height="916" alt="Screenshot 2026-06-05 201047" src="https://github.com/user-attachments/assets/f99f3ea1-ef70-4213-9d47-084254955bb7" />
+
+
+
+<img width="1450" height="913" alt="Screenshot 2026-06-05 201517" src="https://github.com/user-attachments/assets/88801e2c-aaf7-4faa-986d-19ca816a426b" />
+
+
+
+
+
+
