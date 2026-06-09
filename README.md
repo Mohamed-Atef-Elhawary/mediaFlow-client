@@ -1,4 +1,7 @@
-# MediaFlow Client
+# 🏥 mediaFlow - Smart Healthcare Appointment System (Client)
+## landing page
+<img width="1725" height="910" alt="Screenshot 2026-06-05 195628" src="https://github.com/user-attachments/assets/5e2ab35e-a842-472a-aaa3-231b3162fb77" />
+
 A modern, responsive frontend application built with **Angular 17+** and **Tailwind CSS**. 
 This project demonstrates a clean architecture for media content management, focusing on high performance and reactive state management.
 
