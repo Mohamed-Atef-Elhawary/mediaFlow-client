@@ -9,7 +9,6 @@ import { UserRegister } from '../../interfaces/user-register';
 import { UserLogin } from '../../interfaces/user-login';
 import { ToastrService } from 'ngx-toastr';
 import { toastConfig } from '../../config/toastConfig';
-import { PasswordResetService } from '../../services/password-reset-service';
 @Component({
   selector: 'app-register',
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
@@ -24,7 +23,6 @@ export class Register implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private passwordResetService: PasswordResetService,
     private photo: PhotoService,
     private toastr: ToastrService,
     private router: Router,
@@ -33,11 +31,10 @@ export class Register implements OnInit {
   }
 
   ngOnInit() {
-    console.log('form register', this.authService.authView());
     this.route.paramMap.subscribe((param) => {
       let state = param.get('state');
       if (state === 'signin' || state === 'signup') {
-        this.userFormCreator();
+        this.userFormCreater();
         this.authService.authView.set(state);
         if (state === 'signup') {
           this.modifyUserForm(state);
@@ -54,28 +51,30 @@ export class Register implements OnInit {
     this.router.navigate(['/register', state]);
   }
 
-  userFormCreator() {
-    this.userForm = this.fb.group({
-      email: [
-        '',
-        {
-          validators: [Validators.required, Validators.email],
-          nonNullable: true,
-        },
-      ],
-      password: [
-        '',
-        {
-          validators: [
-            Validators.required,
-            Validators.pattern(/^\S+/),
-            Validators.minLength(8),
-            Validators.maxLength(20),
-          ],
-          nonNullable: true,
-        },
-      ],
-    });
+  userFormCreater() {
+    if (!this.userForm) {
+      this.userForm = this.fb.group({
+        email: [
+          '',
+          {
+            validators: [Validators.required, Validators.email],
+            nonNullable: true,
+          },
+        ],
+        password: [
+          '',
+          {
+            validators: [
+              Validators.required,
+              Validators.pattern(/^\S+/),
+              Validators.minLength(8),
+              Validators.maxLength(20),
+            ],
+            nonNullable: true,
+          },
+        ],
+      });
+    }
   }
 
   modifyUserForm(state: AuthView) {
@@ -94,7 +93,7 @@ export class Register implements OnInit {
           }),
         );
       } else {
-        this.userForm.removeControl('fullName');
+        this.userForm.removeControl('name');
       }
     }
   }
@@ -119,20 +118,17 @@ export class Register implements OnInit {
   register(data: UserRegister) {
     this.authService.register(data).subscribe({
       next: (res) => {
-        console.log(res);
         if (res.success) {
-          // conso;
           this.toastr.success(res.message, 'MediaFlow', toastConfig.successConfig);
           this.authService.authView.set('authorized');
           this.router.navigate(['/home']);
           this.authService.updateAuthState(res.data);
         } else {
           this.toastr.error(res.message, 'MediaFlow', toastConfig.errorConfig);
-          // this.authService.updateAuthState(res.data.token);
         }
       },
       error: (err) => {
-        console.log(err);
+        this.toastr.error(err.message, 'MediaFlow', toastConfig.errorConfig);
       },
     });
   }
@@ -140,9 +136,7 @@ export class Register implements OnInit {
   login(data: UserLogin) {
     this.authService.login(data).subscribe({
       next: (res) => {
-        console.log(res);
         if (res.success) {
-          // conso;
           this.toastr.success(res.message, 'MediaFlow', toastConfig.successConfig);
           this.authService.authView.set('authorized');
           this.router.navigate(['/home']);
@@ -152,7 +146,7 @@ export class Register implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
+        this.toastr.error(err.message, 'MediaFlow', toastConfig.errorConfig);
       },
     });
   }

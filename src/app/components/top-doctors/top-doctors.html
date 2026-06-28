@@ -11,13 +11,13 @@
       @for (doctor of topDoctors(); track doctor._id) {
         <article
           [routerLink]="['/appointment', doctor._id]"
-          class="h-[500px] lg:h-auto overflow-hidden flex flex-col p-[10px] bg-slate-50 hover:bg-sky-100 border-2 border-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
+          class="h-[500px] overflow-hidden flex flex-col p-[10px] bg-slate-50 hover:bg-sky-100 border-2 border-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
         >
-          <div class="overflow-hidden w-full h-[65%] p-2 shrink-0">
+          <div class="overflow-hidden w-full h-[70%] p-2 shrink-0">
             <img class="block w-full h-full object-cover" [src]="doctor.image" />
           </div>
 
-          <div class="flex flex-col justify-evenly items-start p-2 mt-4 h-[35%] shrink-0">
+          <div class="flex flex-col justify-evenly items-start p-2 mt-4 h-[30%] shrink-0">
             <p
               class="font-bold text-[3vw] whitespace-nowrap sm:text-[2vw] text-dark dark:text-white"
             >

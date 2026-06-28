@@ -1,10 +1,12 @@
-import { Component, computed, input, OnChanges } from '@angular/core';
+import { Component, computed, input, OnChanges, signal } from '@angular/core';
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { DoctorService } from '../../services/doctor-service';
 import { DoctorData } from '../../interfaces/doctor-data';
 import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { toastConfig } from '../../config/toastConfig';
 
 @Component({
   selector: 'app-related-doctors',
@@ -15,19 +17,32 @@ import { RouterLink } from '@angular/router';
 export class RelatedDoctors {
   availableIcon = faCircleCheck;
   notAvailableIcon = faCircleXmark;
-  relatedDoctors: DoctorData[] = [];
-  constructor(private docotrService: DoctorService) {}
+  reletedDocs = signal<DoctorData[] | []>([]);
+  constructor(
+    private docotrService: DoctorService,
+    private toastr: ToastrService,
+  ) {}
   docId = input.required<string>();
   docSpeciality = input.required<string>();
 
-  reletedDocs = computed(() => {
-    const data = this.docotrService.allDocs()?.data;
-    if (data) {
-      return data.filter(
-        (doc: DoctorData) => doc._id !== this.docId() && doc.speciality === this.docSpeciality(),
-      );
-    }
-    return [];
-  });
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.docotrService.doctors().subscribe({
+      next: (response) => {
+        if (response.success) {
+          const data = response.data;
+          if (data) {
+            this.reletedDocs.update(() => {
+              return data.filter(
+                (doc: DoctorData) =>
+                  doc._id !== this.docId() && doc.speciality === this.docSpeciality(),
+              );
+            });
+          }
+        }
+      },
+      error: (err) => {
+        this.toastr.error(err.message, 'Error', toastConfig.errorConfig);
+      },
+    });
+  }
 }

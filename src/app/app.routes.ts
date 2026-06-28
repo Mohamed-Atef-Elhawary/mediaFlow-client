@@ -3,14 +3,12 @@ import { authGuard } from './guards/auth-guard';
 import { redirectGuard } from './guards/redirect-guard';
 import { profileSettingsResolver } from './resolvers/profile-settings-resolver';
 import { myAppointmentsResolver } from './resolvers/my-appointments-resolver';
-// import { doctorsResolver } from './resolvers/doctors-resolver';
 export const routes: Routes = [
   { path: '', redirectTo: 'outer', pathMatch: 'full' },
   {
     path: 'outer',
     loadComponent: () => import('./pages/outer-page/outer-page').then((c) => c.OuterPage),
     canActivate: [redirectGuard],
-    title: 'MediaFlow',
   },
   {
     path: 'home',
@@ -21,7 +19,6 @@ export const routes: Routes = [
   {
     path: 'doctors',
     loadComponent: () => import('./pages/doctors/doctors').then((c) => c.Doctors),
-    // resolve: { docs: doctorsResolver },
   },
   { path: 'about', loadComponent: () => import('./pages/about/about').then((c) => c.About) },
   {

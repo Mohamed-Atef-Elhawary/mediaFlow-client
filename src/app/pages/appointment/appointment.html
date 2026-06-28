@@ -15,7 +15,9 @@
         </h1>
         <p class="text-xl md:text-[2vw] text-secondary dark:text-slate-400">
           {{ myDoctor().degree }}-{{ myDoctor().speciality }}
-          <span class="border py-2 px-3 rounded-full">{{ myDoctor().experience }} Years</span>
+          <span class="border py-2 px-3 rounded-full hidden sm:inline"
+            >{{ myDoctor().experience }} Years</span
+          >
         </p>
       </section>
       <section class="text-secondary dark:text-slate-300">
@@ -58,7 +60,7 @@
   (click)="isBackDropToCancel($event)"
   class="w-[100vw] h-[100vh] top-0 left-0 py-[10px] px-[5px] bg-black/50 z-60 flex items-center justify-center"
 >
-  <div class="bg-white rounded-xl p-[40px] dark:bg-slate-900">
+  <div class="bg-white rounded-xl p-[10px] sm:p-[40px] w-[80%] md:w-auto dark:bg-slate-900">
     <ng-container #review></ng-container>
   </div>
 </div>

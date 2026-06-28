@@ -14,7 +14,6 @@ import { AuthService } from '../../services/auth-service';
 })
 export class AllReviews implements OnInit {
   reviews: WritableSignal<Review[]> = signal([]);
-  // helpfulLength:WritableSignal<number>=signal(0)
   docId = input.required<string>();
   starIcon = faStar;
   constructor(
@@ -24,9 +23,8 @@ export class AllReviews implements OnInit {
 
   ngOnInit(): void {
     this.ranckingService.allReviews(this.docId()).subscribe({
-      next: (res) => {
-        this.reviews.set(res);
-        console.log('this.reviews()', this.reviews());
+      next: (response) => {
+        this.reviews.set(response.data);
       },
 
       error: (err) => {

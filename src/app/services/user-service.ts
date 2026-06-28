@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth-service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../interfaces/api-response';
@@ -16,45 +16,21 @@ export class UserService {
   ) {}
 
   profile(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${environment.backendUrl}user/profile`, {
-      headers: new HttpHeaders({
-        authorization: `Bearer ${this.auth.userData()?.token}`,
-      }),
-    });
+    return this.http.get<ApiResponse>(`${environment.backendUrl}user/profile`);
   }
 
   updateProfile(data: FormData): Observable<ApiResponse> {
     console.log(Array.from(data));
-    return this.http.post<ApiResponse>(`${environment.backendUrl}user/update`, data, {
-      headers: new HttpHeaders({
-        authorization: `Bearer ${this.auth.userData()?.token}`,
-      }),
-    });
+    return this.http.post<ApiResponse>(`${environment.backendUrl}user/update`, data);
   }
 
   bookAppointment(data: AppointmentRequest): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${environment.backendUrl}user/book`, data, {
-      headers: new HttpHeaders({
-        authorization: `Bearer ${this.auth.userData()?.token}`,
-      }),
-    });
+    return this.http.post<ApiResponse>(`${environment.backendUrl}user/book`, data);
   }
   appointmentsList(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${environment.backendUrl}user/appointments`, {
-      headers: new HttpHeaders({
-        authorization: `Bearer ${this.auth.userData()?.token}`,
-      }),
-    });
+    return this.http.get<ApiResponse>(`${environment.backendUrl}user/appointments`);
   }
   cancleAppointment(appointmentId: string): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(
-      `${environment.backendUrl}user/cancel`,
-      { appointmentId },
-      {
-        headers: new HttpHeaders({
-          authorization: `Bearer ${this.auth.userData()?.token}`,
-        }),
-      },
-    );
+    return this.http.post<ApiResponse>(`${environment.backendUrl}user/cancel`, { appointmentId });
   }
 }

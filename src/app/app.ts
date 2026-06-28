@@ -15,7 +15,4 @@ export class App {
   constructor(private auth: AuthService) {}
 
   authView: Signal<AuthView> = computed(() => this.auth.authView());
-  ngOnInit() {
-    console.log(this.authView());
-  }
 }

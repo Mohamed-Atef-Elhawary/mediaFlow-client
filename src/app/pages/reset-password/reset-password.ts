@@ -14,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
 import { PasswordResetService } from '../../services/password-reset-service';
 import { PhotoService } from '../../services/photo-service';
 import { toastConfig } from '../../config/toastConfig';
-import { UserLogin } from '../../interfaces/user-login';
 import { AuthService } from '../../services/auth-service';
 import { LoginResponse } from '../../interfaces/login-response';
 import { NgClass } from '@angular/common';
@@ -48,9 +47,9 @@ export class ResetPassword implements OnInit {
     this.route.queryParams.subscribe((res) => {
       this.token = res['token'];
     });
-    this.passFormCreator();
+    this.passFormCreater();
   }
-  passFormCreator(): void {
+  passFormCreater(): void {
     this.newPassForm = this.fb.group(
       {
         newPassword: [
@@ -74,7 +73,6 @@ export class ResetPassword implements OnInit {
       },
       { validators: this.isEqual },
     );
-    // this.cdr.detectChanges();
   }
 
   get newPassword() {
@@ -104,16 +102,12 @@ export class ResetPassword implements OnInit {
           } else {
             this.toastr.success(response.message, 'Erorr', toastConfig.errorConfig);
           }
-          console.log(response);
         },
         error: (err) => {
           this.toastr.error(err.message, 'Error', toastConfig.errorConfig);
-          console.log(err);
         },
       });
     }
-    console.log(this.newPassForm.valid);
-    console.log(this.newPassForm.value);
   }
 
   loginToHome(data: LoginResponse) {

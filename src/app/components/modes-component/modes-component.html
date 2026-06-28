@@ -2,14 +2,14 @@
   <div class="flex justify-end p-2">
     <fa-icon
       (click)="closeModeOptions()"
-      class="text-red-300 hover:text-danger"
+      class="cursor-pointer text-red-300 hover:text-danger"
       [icon]="xIcon"
     ></fa-icon>
   </div>
 
   <div
     (click)="setMode('Light')"
-    class="flex justify-between p-2 hover:bg-sky-100 dark:hover:bg-slate-700 dark:text-white"
+    class="flex justify-between p-2 cursor-pointer hover:bg-sky-100 dark:hover:bg-slate-700 dark:text-white"
   >
     <div class="flex gap-2">
       <fa-icon [icon]="sunIcon"></fa-icon>
@@ -22,7 +22,7 @@
 
   <div
     (click)="setMode('Dark')"
-    class="flex justify-between p-2 hover:bg-sky-100 dark:hover:bg-slate-700 dark:text-white"
+    class="flex justify-between p-2 cursor-pointer hover:bg-sky-100 dark:hover:bg-slate-700 dark:text-white"
   >
     <div class="flex gap-2">
       <fa-icon [icon]="moonIcon"></fa-icon>
