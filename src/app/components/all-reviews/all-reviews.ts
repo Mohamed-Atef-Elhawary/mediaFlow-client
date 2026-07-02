@@ -5,6 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { DatePipe, NgClass } from '@angular/common';
 import { AuthService } from '../../services/auth-service';
+import { ToastrService } from 'ngx-toastr';
+import { toastConfig } from '../../config/toastConfig';
 
 @Component({
   selector: 'app-all-reviews',
@@ -19,6 +21,7 @@ export class AllReviews implements OnInit {
   constructor(
     private ranckingService: RankingService,
     private authService: AuthService,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -26,9 +29,8 @@ export class AllReviews implements OnInit {
       next: (response) => {
         this.reviews.set(response.data);
       },
-
       error: (err) => {
-        console.log(err);
+        this.toastr.error(err.message, 'Error', toastConfig.errorConfig);
       },
     });
   }
@@ -44,14 +46,10 @@ export class AllReviews implements OnInit {
     const isExists = this.isExists(helpfulVotes);
 
     if (isExists) {
-      //remove userId
       this.removeUserId(reviewId);
     } else {
-      //add userId
       this.addUserId(reviewId);
     }
-
-    this.ranckingService.helpfulReview(reviewId).subscribe(console.log);
   }
 
   removeUserId(reviewId: string): void {

@@ -107,7 +107,7 @@ export class ProfileSettings {
   }
 
   isNotChanged(): boolean {
-    let { address, email, gender, name, phone } = this.userInfo() as ApiUserInfo;
+    let { address, email, gender, name, phone, dateOfBirth } = this.userInfo() as ApiUserInfo;
 
     let {
       address: newAddress,
@@ -116,6 +116,7 @@ export class ProfileSettings {
       image: newImage,
       name: newName,
       phone: newPhone,
+      dateOfBirth: newDateOfBirth,
     } = this.userForm.value;
     return (
       address.line1 === newAddress.line1 &&
@@ -124,6 +125,7 @@ export class ProfileSettings {
       gender === newGender &&
       name === newName &&
       phone === newPhone &&
+      newDateOfBirth === dateOfBirth &&
       newImage === undefined
     );
   }
@@ -143,7 +145,6 @@ export class ProfileSettings {
           'Error',
           toastConfig.errorConfig,
         );
-        console.log('errrrrrrrrrrrr', err);
       },
     });
   }
@@ -154,6 +155,8 @@ export class ProfileSettings {
     userFormData.append('email', this.userForm.get('email')?.value);
     userFormData.append('gender', this.userForm.get('gender')?.value);
     userFormData.append('phone', this.userForm.get('phone')?.value);
+    userFormData.append('dateOfBirth', this.userForm.get('dateOfBirth')?.value);
+
     userFormData.append('address', JSON.stringify(this.userForm.get('address')?.value));
 
     if (this.userForm.get('image')) {

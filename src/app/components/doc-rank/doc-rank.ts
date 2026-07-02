@@ -25,7 +25,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './doc-rank.html',
   styleUrl: './doc-rank.css',
 })
-export class DocRank implements OnInit, OnChanges {
+export class DocRank implements OnChanges {
   arrow = faArrowRight;
   starIcon = faStar;
   ranking = input.required<DoctorRank>();
@@ -40,9 +40,6 @@ export class DocRank implements OnInit, OnChanges {
     private cdr: ChangeDetectorRef,
   ) {}
 
-  ngOnInit() {
-    // console.log(this.docRank());
-  }
   ngOnChanges(): void {
     const { rank: rankAlias, totalReviewers } = this.ranking();
     if (rankAlias !== undefined && totalReviewers) {
@@ -72,35 +69,6 @@ export class DocRank implements OnInit, OnChanges {
       });
       this.cdr.detectChanges();
     }
-
-    console.log(this.docRank());
-    // if (this.ranking()) {
-    //     this.docRank.set(() => {
-    //   let ranking: string[] = this.ranking()?.rank.toString().split('.');
-    //   if (ranking[1] && ranking[1].length > 2) {
-    //     ranking[1] = ranking[1].slice(0, 1);
-    //   }
-    //   let rank = {
-    //     decimal: Number(ranking[0]),
-    //     frag: Number(ranking[1] || 0),
-    //   };
-    //   let totalReviewers = this.ranking().totalReviewers;
-    //   let ratingDistribution: { [key: number]: string } = {};
-    //   for (let key in this.ranking().ratingDistribution) {
-    //     if (this.ranking().ratingDistribution[key]) {
-    //       let rate = (this.ranking().ratingDistribution[key] / totalReviewers) * 100;
-    //       ratingDistribution[key] = `${rate}%`;
-    //     } else {
-    //       ratingDistribution[key] = `${this.ranking().ratingDistribution[key]}%`;
-    //     }
-    //   }
-    //   return {
-    //     rank,
-    //     totalReviewers,
-    //     ratingDistribution,
-    //   };
-    // });
-    // }
   }
 
   emitReviewing(rank: number): void {

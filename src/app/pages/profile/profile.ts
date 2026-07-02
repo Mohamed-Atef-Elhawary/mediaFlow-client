@@ -25,7 +25,6 @@ export class Profile implements OnInit {
     return this.auth.userInfo();
   });
   ngOnInit() {
-    // this.route.snapshot.data
     const resolveObj = this.route.snapshot.data['profileResolver'];
     if (resolveObj.success == true) {
       this.auth.userDataSeter(resolveObj.data);

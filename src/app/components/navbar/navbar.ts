@@ -107,7 +107,6 @@ export class Navbar implements AfterViewInit {
   }
 
   authView = computed(() => {
-    console.log('from navBar', this.authService.authView());
     return this.authService.authView();
   });
 

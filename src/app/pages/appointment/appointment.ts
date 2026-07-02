@@ -7,7 +7,6 @@ import {
   signal,
   ViewChild,
   ViewContainerRef,
-  WritableSignal,
 } from '@angular/core';
 import { DoctorService } from '../../services/doctor-service';
 import { ActivatedRoute } from '@angular/router';
@@ -24,6 +23,7 @@ import { DocRank } from '../../components/doc-rank/doc-rank';
 import { DoctorRank } from '../../interfaces/doctor-rank';
 import { RankingService } from '../../services/ranking-service';
 import { AllReviews } from '../../components/all-reviews/all-reviews';
+import { toastConfig } from '../../config/toastConfig';
 @Component({
   selector: 'app-appointment',
   imports: [
@@ -84,7 +84,7 @@ export class Appointment implements OnInit {
         }
       },
       error: (err) => {
-        console.log('error from getDoctor ', err);
+        this.toastr.success(err.message, 'Error', toastConfig.errorConfig);
       },
     });
   }
@@ -96,7 +96,6 @@ export class Appointment implements OnInit {
 
     this.review.clear();
     const componentRef = this.review.createComponent(myComp);
-    // console.log('componentRef', componentRef);
 
     if (this.myDoctor()) {
       componentRef.setInput('doctorData', {
@@ -111,7 +110,6 @@ export class Appointment implements OnInit {
     });
   }
   startReviewing(rank: number): void {
-    // console.log('from appointment rank', rank);
     this.rankingService.docRank.set(rank);
     this.rankingService.backDrop.set(true);
     this.getReviewComp();
@@ -121,8 +119,6 @@ export class Appointment implements OnInit {
       this.rankingService.backDrop.set(false);
       this.review.clear();
     }
-    // console.log('event.target', event.target);
-    // console.log('event.currentTarget', event.currentTarget);
   }
   dataAfterReview(data: { newRank: number; totalReviewers: number }) {
     this.myDoctor.update((v) => {

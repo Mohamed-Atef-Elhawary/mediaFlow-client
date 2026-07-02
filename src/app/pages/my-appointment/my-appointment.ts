@@ -49,7 +49,6 @@ export class MyAppointment implements OnInit {
             return appointment;
           });
           this.cdr.detectChanges();
-          console.log(this.myAppointments());
         } else {
           this.toastr.error(res.message, 'Error', toastConfig.errorConfig);
         }

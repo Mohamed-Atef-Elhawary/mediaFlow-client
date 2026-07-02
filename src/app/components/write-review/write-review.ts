@@ -70,10 +70,8 @@ export class WriteReview implements OnInit {
               totalReviewers: res.data.totalReviewers,
             });
           }
-          console.log('res from write-review ', res);
         },
         error: (err) => {
-          console.log(err);
           this.toastr.error(err.message, 'Error', toastConfig.errorConfig);
         },
       });
@@ -82,7 +80,6 @@ export class WriteReview implements OnInit {
   }
 
   endReviewing(): void {
-    console.log('endReviewing()');
     this.rankingService.backDrop.set(false);
   }
 }
