@@ -62,6 +62,8 @@ export class AllReviews implements OnInit {
         return review;
       });
     });
+    console.log('remove vots');
+    this.ranckingService.helpfulReview(reviewId).subscribe();
   }
 
   addUserId(reviewId: string) {
@@ -76,5 +78,6 @@ export class AllReviews implements OnInit {
         return review;
       });
     });
+    this.ranckingService.helpfulReview(reviewId).subscribe();
   }
 }
