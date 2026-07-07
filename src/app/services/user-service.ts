@@ -20,7 +20,7 @@ export class UserService {
   }
 
   updateProfile(data: FormData): Observable<ApiResponse> {
-    console.log(Array.from(data));
+    // console.log(Array.from(data));
     return this.http.post<ApiResponse>(`${environment.backendUrl}user/update`, data);
   }
 

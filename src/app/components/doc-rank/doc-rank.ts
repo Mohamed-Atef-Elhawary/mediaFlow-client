@@ -67,8 +67,23 @@ export class DocRank implements OnChanges {
         totalReviewers,
         ratingDistribution,
       });
-      this.cdr.detectChanges();
+    } else {
+      this.docRank.set({
+        rank: {
+          decimal: 0,
+          frag: 0,
+        },
+        totalReviewers: this.ranking().totalReviewers,
+        ratingDistribution: {
+          1: '0%',
+          2: '0%',
+          3: '0%',
+          4: '0%',
+          5: '0%',
+        },
+      });
     }
+    this.cdr.detectChanges();
   }
 
   emitReviewing(rank: number): void {

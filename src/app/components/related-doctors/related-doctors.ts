@@ -25,7 +25,7 @@ export class RelatedDoctors {
   docId = input.required<string>();
   docSpeciality = input.required<string>();
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.docotrService.doctors().subscribe({
       next: (response) => {
         if (response.success) {

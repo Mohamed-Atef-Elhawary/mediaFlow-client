@@ -90,6 +90,7 @@ export class Appointment implements OnInit {
   }
 
   async getReviewComp() {
+    this.cdr.detectChanges();
     const myComp = await import('../../components/write-review/write-review').then(
       (comp) => comp.WriteReview,
     );

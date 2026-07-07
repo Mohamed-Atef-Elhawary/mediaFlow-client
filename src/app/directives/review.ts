@@ -6,18 +6,14 @@ import { RankingService } from '../services/ranking-service';
 })
 export class ReviewDirective implements OnInit {
   index = input.required<number>();
-  count = 1;
   constructor(
     private rankingService: RankingService,
     private ele: ElementRef,
   ) {}
   ngOnInit(): void {
     const currentRanc: number = this.rankingService.docRank();
-    // console.log('currentRanc', currentRanc, this.count++);
-    // console.log('currentRanc', currentRanc, this.count++);
     let children = [...this.ele.nativeElement.parentElement.children];
     for (let i = 0; i < currentRanc; i++) {
-      // console.log('children[i]', children[i]);
       children[i].firstChild.classList.add('text-primary');
     }
   }

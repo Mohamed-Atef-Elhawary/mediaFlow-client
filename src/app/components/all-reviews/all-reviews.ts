@@ -14,7 +14,7 @@ import { toastConfig } from '../../config/toastConfig';
   templateUrl: './all-reviews.html',
   styleUrl: './all-reviews.css',
 })
-export class AllReviews implements OnInit {
+export class AllReviews {
   reviews: WritableSignal<Review[]> = signal([]);
   docId = input.required<string>();
   starIcon = faStar;
@@ -24,7 +24,7 @@ export class AllReviews implements OnInit {
     private toastr: ToastrService,
   ) {}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.ranckingService.allReviews(this.docId()).subscribe({
       next: (response) => {
         this.reviews.set(response.data);
