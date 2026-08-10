@@ -10,17 +10,13 @@ import { AppointmentRequest } from '../interfaces/appointment-request';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(
-    private auth: AuthService,
-    private http: HttpClient,
-  ) {}
+  constructor(private http: HttpClient) {}
 
   profile(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(`${environment.backendUrl}user/profile`);
   }
 
   updateProfile(data: FormData): Observable<ApiResponse> {
-    // console.log(Array.from(data));
     return this.http.post<ApiResponse>(`${environment.backendUrl}user/update`, data);
   }
 

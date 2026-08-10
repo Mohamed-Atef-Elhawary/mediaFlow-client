@@ -35,7 +35,6 @@ export class WriteReview implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private cdr: ChangeDetectorRef,
     private rankingService: RankingService,
     private fb: FormBuilder,
     private toastr: ToastrService,
