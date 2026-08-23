@@ -1,41 +1,76 @@
-# 🏥 mediaFlow - Smart Healthcare Appointment System (Client)
-## Landing Page
-<img width="1725" height="910" alt="landing page" src="https://github.com/user-attachments/assets/5e2ab35e-a842-472a-aaa3-231b3162fb77" />
+# 🏥 MediaFlow — Client (Patient Portal)
 
-A modern, responsive frontend application built with **Angular 17+** and **Tailwind CSS**. 
-This project demonstrates a clean architecture for media content management, focusing on high performance and reactive state management.
+A patient-facing web portal that allows users to securely sign up/log in, book appointments with doctors, and leave ratings & reviews after their visits. Built with **Angular** and **Tailwind CSS**, connecting to a dedicated **Express.js/MongoDB** backend via a secure JWT-based API.
 
-## Key Features
-* Modern State Management: Leveraging **Angular Signals** for optimized, reactive data flow and UI updates.
+**🔗 Live Demo:** [media-flow-client.vercel.app](https://media-flow-client.vercel.app)
 
-* Responsive UI: Custom-built components using **Tailwind CSS** for a seamless mobile-first experience.
+---
 
-* Efficient Data Handling: Using **RxJS** for managing asynchronous streams and API interactions.
+## ✨ Features
 
-* Clean Architecture: Modular structure to ensure scalability and maintainability.
+- 🔐 **Patient Authentication** — Secure sign up, login, and session management using JWT.
+- 📅 **Appointment Booking** — Browse available doctors and book appointments directly from the portal.
+- ⭐ **Doctor Ratings & Reviews** — Patients can rate doctors and leave reviews based on their experience.
+- 📱 **Responsive UI** — Clean, mobile-friendly interface built with Tailwind CSS.
+- 🔗 **API-Driven** — Communicates with a separate backend service for all data operations.
 
-## Tech Stack
-* **framework:** Angular 17+
-* **Styling:** Tailwind CSS
-* **Asynchronous Logic:** RxJS
-* **State Management:** Angular Signals
+---
 
-## presentation overview
+## 🛠️ Tech Stack
 
-### Registration Form
-<img width="1442" height="911" alt="registration form" src="https://github.com/user-attachments/assets/06cf73c8-1df6-438f-a408-b1b245f255ee" />
-<img width="1506" height="912" alt="registration for" src="https://github.com/user-attachments/assets/e2f76a44-b84f-4e06-8de1-8ab841f5ac5c" />
+| Category | Technology |
+|---|---|
+| Framework | [Angular 17+](https://angular.io/) |
+| Language | [TypeScript](https://www.typescriptlang.org/) |
+| Styling | [Tailwind CSS](https://tailwindcss.com/) |
+| Backend | [Express.js](https://expressjs.com/) *(separate repository)* |
+| Database | [MongoDB](https://www.mongodb.com/) |
+| Auth | [JWT](https://jwt.io/) (JSON Web Tokens) |
+| Deployment | [Vercel](https://vercel.com/) |
 
-### Home Page
-<img width="1446" height="910" alt="home page" src="https://github.com/user-attachments/assets/81bfb7d8-5b97-466f-a5f7-4a6787a8bb62" />
-<img width="1491" height="916" alt="home page" src="https://github.com/user-attachments/assets/f99f3ea1-ef70-4213-9d47-084254955bb7" />
+> ℹ️ This repository contains the **frontend (client)** only. The backend API is maintained in a separate repository.
 
+---
 
-### Review Component 
-<img width="1450" height="913" alt="review component " src="https://github.com/user-attachments/assets/88801e2c-aaf7-4faa-986d-19ca816a426b" />
+## 🚀 Getting Started
 
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [Angular CLI](https://angular.io/cli)
+- The MediaFlow backend running locally or deployed (see backend repo)
 
+### Installation
 
+```bash
+# Clone the repository
+git clone https://github.com/<your-username>/mediaflow-client.git
+cd mediaflow-client
 
+# Install dependencies
+npm install
+```
 
+### Environment Setup
 
+Configure the API base URL in `src/environments/environment.ts`:
+
+```ts
+export const environment = {
+  production: false,
+  apiUrl: "http://localhost:3000/api" // point to your backend URL
+};
+```
+
+### Run Locally
+
+```bash
+ng serve
+```
+
+Then navigate to `http://localhost:4200/`.
+
+### Build for Production
+
+```bash
+ng build --configuration production
+```
